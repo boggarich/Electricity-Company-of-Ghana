@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="32.312" height="30" viewBox="0 0 32.312 30">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #2198f3;
+        fill-rule: evenodd;
+      }
+    </style>
+  </defs>
+  <path id="File_Box" data-name="File Box" class="cls-1" d="M562,2051a6.012,6.012,0,0,1-5.916-5H545.856l2.151-16.13,1.982,0.26L548.14,2044H558v1a4,4,0,0,0,8,0v-1h9.856l-1.848-13.87,1.983-.26,2.151,16.13H567.915A6.014,6.014,0,0,1,562,2051Zm16,6H546v-9h2v7h28v-7h2v9Zm-6-15h-2v-13H554v13h-2v-15h20v15Zm-11-9h-5v-2h5v2Zm7,4H556v-2h12v2Zm0,4H556v-2h12v2Z" transform="translate(-545.844 -2027)"/>
+</svg>

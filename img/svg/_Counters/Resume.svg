@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="28" height="32" viewBox="0 0 28 32">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #2198f3;
+        fill-rule: evenodd;
+      }
+    </style>
+  </defs>
+  <path id="Resume" class="cls-1" d="M15165,2604h-28v-26h2v24h24v-28h-20v-2h22v32Zm-5-8h-18v-2h18v2Zm0,4h-18v-2h18v2Zm-9-16a4,4,0,1,1,4-4A4.005,4.005,0,0,1,15151,2584Zm0-6a2,2,0,1,0,2,2A2.006,2.006,0,0,0,15151,2578Zm6.2,14h-12.4l1.3-7,2.6-.94,0.6,1.88-1.4.54-0.7,3.52h7.6l-0.7-3.43-1.5-.65,0.8-1.84,2.5,1.08Z" transform="translate(-15137 -2572)"/>
+</svg>

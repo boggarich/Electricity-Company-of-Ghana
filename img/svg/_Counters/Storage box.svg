@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="32" height="28" viewBox="0 0 32 28">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #2198f3;
+        fill-rule: evenodd;
+      }
+    </style>
+  </defs>
+  <path id="Storage_box" data-name="Storage box" class="cls-1" d="M1024,2040H992v-12h32v12Zm-30-2h28v-8H994v8Zm27,18H995v-15h2v13h22v-13h2v15Zm-5-8h-16v-6h2v4h12v-4h2v6Z" transform="translate(-992 -2028)"/>
+</svg>
