@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="19" height="17" viewBox="0 0 19 17">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #051f33;
+        fill-rule: evenodd;
+      }
+    </style>
+  </defs>
+  <path id="Notifications_bubble" data-name="Notifications bubble" class="cls-1" d="M6304.43,752.528h0v-5.744h-3.41a1.948,1.948,0,0,0-2.03,2.03v5.4a1.832,1.832,0,0,0,2.03,2.068h0.69V759l3.07-2.719h4.71c1.07,0,1.73-.728,1.73-2.068v-1.685h-6.79ZM6315.97,742h-8.51a1.928,1.928,0,0,0-1.69,2.067v7.429h6.48l3.03,2.719v-2.719h0.69a1.927,1.927,0,0,0,2.03-2.029v-5.4a2.191,2.191,0,0,0-2.03-2.067h0Z" transform="translate(-6299 -742)"/>
+</svg>

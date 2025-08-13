@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="16" height="19.219" viewBox="0 0 16 19.219">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #c0d2f9;
+        fill-rule: evenodd;
+      }
+    </style>
+  </defs>
+  <path id="Cases" class="cls-1" d="M41.689,369.84a2.423,2.423,0,0,1,2.43,2.4v12h1.6v-12A4.03,4.03,0,0,0,42.44,368.3a4.032,4.032,0,0,0-3.951-3.264H29.72v19.2h14.4v-1.6H31.32v-16h7.17a2.423,2.423,0,0,1,2.43,2.4v0.8h0.77Zm-7.97.8v1.6h3.2v-1.6h-3.2Zm0,4.8h7.2v-1.6h-7.2v1.6Zm0,3.111h7.2v-1.6h-7.2v1.6Z" transform="translate(-29.719 -365.031)"/>
+</svg>

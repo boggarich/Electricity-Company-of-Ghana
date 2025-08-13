@@ -1,0 +1,1694 @@
+<!DOCTYPE html>
+<!-- 
+
+
+
+
+
+
+-->
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>rs-lab</title>
+        <meta name="description" content="AltEditor (beta)">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, user-scalable=no, minimal-ui">
+        <!-- Call App Mode on ios devices -->
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <!-- Remove Tap Highlight on Windows Phone IE -->
+        <meta name="msapplication-tap-highlight" content="no">
+        <!-- base css -->
+        <link id="vendorsbundle" rel="stylesheet" media="screen, print" href="/css/vendors.bundle.css">
+        <link id="appbundle" rel="stylesheet" media="screen, print" href="/css/app.bundle.css">
+        <link id="mytheme" rel="stylesheet" media="screen, print" href="/css/themes/cust-theme-4.css">
+        <link id="myskin" rel="stylesheet" media="screen, print" href="/css/skins/skin-master.css">
+        <!-- Place favicon.ico in the root directory -->
+        <link rel="apple-touch-icon" sizes="180x180" href="img/favicon/apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="img/favicon/favicon-32x32.png">
+        <link rel="mask-icon" href="img/favicon/safari-pinned-tab.svg" color="#5bbad5">
+        <link rel="stylesheet" media="screen, print" href="/css/theme-demo.css">
+        <link rel="stylesheet" media="screen, print" href="/css/fa-solid.css">
+        <link rel="stylesheet" media="screen, print" href="/css/statistics/c3/c3.css">
+        <link rel="stylesheet" media="screen, print" href="/css/datagrid/datatables/datatables.bundle.css">
+        <link rel="stylesheet" media="screen, print" href="css/formplugins/bootstrap-daterangepicker/bootstrap-daterangepicker.css">
+        <link rel="stylesheet" media="screen, print" href="css/statistics/dygraph/dygraph.css">
+        <link rel="stylesheet" media="screen, print" href="/css/formplugins/ion-rangeslider/ion-rangeslider.css">
+        <link rel="stylesheet" href="assets/vendor/libs/bootstrap-select/bootstrap-select.css">
+        <link rel="stylesheet" media="screen, print" href="/css/formplugins/summernote/summernote.css">
+        <link rel="stylesheet" media="screen, print" href="/css/formplugins/select2/select2.bundle.css">
+
+    <link href="/js/app.js" rel="preload" as="script"><link href="/js/chunk-vendors.js" rel="preload" as="script"></head>
+    <style>
+        #dt-meter-finder thead tr th:nth-child(8) {
+            text-align: center;
+        }
+        #dt-meter-finder thead tr th:nth-child(9) {
+            text-align: center;
+        }
+        #dt-meter-finder tbody tr td:nth-child(9) {
+            text-align: center;
+        }
+
+        #dt-meter-finder tbody tr td:nth-child(8) {
+            text-align: center;
+        }
+
+        #dt-meter-finder button {
+            border-radius: 8px;
+        }
+        #connected-meters, #meter-finder {
+            display: none;
+        }
+        .badge-pill.custom-success {
+            background-color: #1bc9b6;
+        }
+        .badge-pill.custom-warning {
+            background-color: #fdb14a;
+        }
+        .badge-pill.custom-danger {
+            background-color: #fd6d8e;
+        }
+        #dt-connected-meters tr td:nth-child(11) {
+            text-align: center;
+        }
+        #dt-connected-meters tr th:nth-child(11) {
+            text-align: center;
+        }
+        #dt-connected-meters tr th:last-child {
+            border-right: 0px;
+        }
+        #dt-connected-meters tr td:last-child {
+            border-right: 0px;
+        }
+        #dt-connected-meters {
+            border-left: 0px;
+        }
+        .connected-meters-dt-filters {
+            margin-bottom: 1.85rem;
+        }
+        #dt-connected-meters_length {
+            margin-right: 8px;
+        }
+        .connected-meters-wrapper .counter-tiles-wrapper{
+            margin-left: 8px;
+        }
+        .connected-meters-wrapper .tile-headers {
+            margin-bottom: 1.25rem !important;
+        }
+        .connected-meters-wrapper .count-tiles-wrapper {
+            margin-left: 8px;
+            margin-bottom: 2rem;
+        }
+        #dt-connected-meters_filter {
+            margin-left: 8px;
+        }
+        
+
+    </style>
+    <!-- BEGIN Body -->
+    <!-- Possible Classes
+
+		* 'header-function-fixed'         - header is in a fixed at all times
+		* 'nav-function-fixed'            - left panel is fixed
+		* 'nav-function-minify'			  - skew nav to maximize space
+		* 'nav-function-hidden'           - roll mouse on edge to reveal
+		* 'nav-function-top'              - relocate left pane to top
+		* 'mod-main-boxed'                - encapsulates to a container
+		* 'nav-mobile-push'               - content pushed on menu reveal
+		* 'nav-mobile-no-overlay'         - removes mesh on menu reveal
+		* 'nav-mobile-slide-out'          - content overlaps menu
+		* 'mod-bigger-font'               - content fonts are bigger for readability
+		* 'mod-high-contrast'             - 4.5:1 text contrast ratio
+		* 'mod-color-blind'               - color vision deficiency
+		* 'mod-pace-custom'               - preloader will be inside content
+		* 'mod-clean-page-bg'             - adds more whitespace
+		* 'mod-hide-nav-icons'            - invisible navigation icons
+		* 'mod-disable-animation'         - disables css based animations
+		* 'mod-hide-info-card'            - hides info card from left panel
+		* 'mod-lean-subheader'            - distinguished page header
+		* 'mod-nav-link'                  - clear breakdown of nav links
+
+		>>> more settings are described inside documentation page >>>
+	-->
+    <body class="mod-bg-1 mod-nav-link ">
+        <noscript>
+            <strong>We're sorry but rs-lab doesn't work
+              properly without JavaScript enabled. Please enable it to
+              continue.</strong>
+        </noscript>
+        <!-- DOC: script to save and load page settings -->
+        
+        <!-- BEGIN Page Wrapper -->
+        <div id="app"></div>
+
+        <div id="meter-finder" class="custom-tile mt-2" style="margin-bottom: 12rem; margin-left: 1rem; margin-right: 2rem; padding-left: 1.5rem; padding-right: 1.5rem; padding-top: 0.5rem !important;">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="custom-btn-group d-flex align-items-center pb-4 pt-3">
+                        <span style="font-weight: 500; color: #333; margin-left: 12px;">Add new</span>
+                        <button style="width: 7rem !important; border-radius: 8px;" class="btn btn-primary ml-3 mr-3 position-relative" id="addSchoolShowWizardOneModalBtn" data-toggle="modal" data-target="#add-meter-modal"><span class="mr-2"><i class="fal fa-plus"></i></span>Meter</button>
+                        <div class="d-flex align-items-center csv-import-btn ml-auto" style="font-weight: 500; color: #333; margin-right: 17px;">Import <div class="btn btn-outline-primary ml-3" data-toggle="modal" data-target="#multiple-data-import-modal">Excel, CSV</div></div>
+                        
+                        
+                    </div>
+                </div>
+    
+            </div>
+            <table id="dt-meter-finder" class="table table-bordered table-unbordered table-hover w-100">
+                <thead>
+                    <tr>
+                        <th>Meter No.</th>
+                        <th>Report</th>
+                        <th>Meter Type</th>
+                        <th>Meter State</th>
+                        <th>Location</th>
+                        <th>Current User</th>
+                        <th>Registered Owner</th>
+                        <th>Inspection</th>
+                        <th>Billing</th>
+                        <th>Manage</th>
+                        
+                        
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>P010-202115<br><small class="text-muted">Ghana Post Address</small></td>
+                        <td>
+                            <div class="" style="width: auto">
+                                <div class="badge-pill custom-danger">Illegal</div><small class="text-muted text-center mt-1">Report date</small>
+                            </div>
+                        </td>
+                        <td>Prepaid <br><small class="text-muted">ECG (Provider)</small></td>
+                        <td>Good <br><small class="text-muted">Last test date</small></td>
+                        <td>
+                            Asylum down <br><small class="text-muted">Greater Accra</small>
+                        </td>
+                        <td>
+                            Kwame Esuman <br><small class="text-muted">0552548190</small>
+                        </td>
+                        <td>
+                            Amoah Kofi <br><small class="text-muted">0202115566</small>
+                        </td>
+                        <td>
+                            <button class="btn btn-secondary">Report</button>
+                        </td>
+                        <td>
+                            <button class="btn btn-primary">Statement</button>
+                        </td>
+                        <td>
+                            <div class="d-flex">
+                                <a href="javascript:void(0);" class="btn btn-outline-success btn-icon mr-2">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="19.88" height="14.5" viewBox="0 0 19.88 14.5">
+                                        <path id="Eye" class="cls-1" d="M7417.64,1472.56c-0.41-3.1-4.2-5.52-8.65-5.52h-0.1c-4.5.04-8.3,2.46-8.66,5.52l-1.23-.14c0.43-3.71,4.68-6.55,9.88-6.59h0.11c5.06,0,9.39,2.88,9.89,6.58Zm-8.75,7.79c-5.06,0-9.4-2.87-9.89-6.58l1.23-.15c0.41,3.11,4.21,5.52,8.66,5.52h0.1c4.5-.03,8.3-2.46,8.65-5.51l1.24,0.13c-0.43,3.72-4.68,6.55-9.88,6.59h-0.11Zm0.05-2.42a4.842,4.842,0,1,1,4.97-4.88,4.786,4.786,0,0,1-1.43,3.44,4.991,4.991,0,0,1-3.5,1.44h-0.04Zm0-8.47a3.631,3.631,0,1,0,0,7.26v0.61l0.03-.61a3.766,3.766,0,0,0,2.63-1.08,3.551,3.551,0,0,0,1.07-2.58A3.7,3.7,0,0,0,7408.94,1469.46Zm-2.49,3.65a2.463,2.463,0,0,1,2.47-2.44l0.01,1.21a1.242,1.242,0,0,0-1.24,1.22Z" transform="translate(-7399 -1465.84)"/>
+                                    </svg>
+                                </a>
+                                <a href="javascript:void(0);" class="btn btn-outline-warning btn-icon mr-2">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="19.53" height="19" viewBox="0 0 19.53 19">
+                                        <path id="Pencil" class="cls-1" d="M7466.45,1470.62l-5.27-5.13,0.44-.43a3.805,3.805,0,0,1,5.27,0,3.569,3.569,0,0,1,0,5.13Zm-3.46-5.08,3.41,3.32a2.39,2.39,0,0,0-.39-2.95A2.6,2.6,0,0,0,7462.99,1465.54Zm0.74,7.24-3.73-6.04,1.07-.63,3.73,6.04ZM7448.46,1483l1.85-6.76,1.2,0.31-1.3,4.75,4.89-1.26,0.32,1.17Zm7.97-2.67-1.47-3.65-3.75-1.43,7.72-7.58,0.88,0.85-6.39,6.27,2.5,0.96,0.98,2.42,5.18-5.01,0.88,0.85Z" transform="translate(-7448.47 -1464)"/>
+                                      </svg>
+                                </a>
+                                <a href="javascript:void(0);" class="btn btn-outline-danger btn-icon">
+                                    <i class="fal fa-times"></i>
+                                </a>
+                            </div>
+                        </td>
+                       
+                    </tr>
+                    <tr>
+                        <td>P20-09-202135<br><small class="text-muted">GA-201-5642</small></td>
+                        <td>
+                            <div class="" style="width: auto">
+                                <div class="badge-pill custom-warning">Suspect</div><small class="text-muted text-center mt-1">21/10/21 9:00am</small>
+                            </div>
+                        </td>
+                        <td>Analog <br><small class="text-muted">ECG</small></td>
+                        <td>Faulty <br><small class="text-muted">Test: 21/10/21</small></td>
+                        <td>
+                            Kaneshie <br><small class="text-muted">Greater Accra</small>
+                        </td>
+                        <td>
+                            Fiifi Benson <br><small class="text-muted">0302221790</small>
+                        </td>
+                        <td>
+                            Koo Nimo <br><small class="text-muted">0203457891</small>
+                        </td>
+                        <td>
+                            <button class="btn btn-secondary">Report</button>
+                        </td>
+                        <td>
+                            <button class="btn btn-primary">Statement</button>
+                        </td>
+                        <td>
+                            <div class="d-flex">
+                                <a href="javascript:void(0);" class="btn btn-outline-success btn-icon mr-2">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="19.88" height="14.5" viewBox="0 0 19.88 14.5">
+                                        <path id="Eye" class="cls-1" d="M7417.64,1472.56c-0.41-3.1-4.2-5.52-8.65-5.52h-0.1c-4.5.04-8.3,2.46-8.66,5.52l-1.23-.14c0.43-3.71,4.68-6.55,9.88-6.59h0.11c5.06,0,9.39,2.88,9.89,6.58Zm-8.75,7.79c-5.06,0-9.4-2.87-9.89-6.58l1.23-.15c0.41,3.11,4.21,5.52,8.66,5.52h0.1c4.5-.03,8.3-2.46,8.65-5.51l1.24,0.13c-0.43,3.72-4.68,6.55-9.88,6.59h-0.11Zm0.05-2.42a4.842,4.842,0,1,1,4.97-4.88,4.786,4.786,0,0,1-1.43,3.44,4.991,4.991,0,0,1-3.5,1.44h-0.04Zm0-8.47a3.631,3.631,0,1,0,0,7.26v0.61l0.03-.61a3.766,3.766,0,0,0,2.63-1.08,3.551,3.551,0,0,0,1.07-2.58A3.7,3.7,0,0,0,7408.94,1469.46Zm-2.49,3.65a2.463,2.463,0,0,1,2.47-2.44l0.01,1.21a1.242,1.242,0,0,0-1.24,1.22Z" transform="translate(-7399 -1465.84)"/>
+                                    </svg>
+                                </a>
+                                <a href="javascript:void(0);" class="btn btn-outline-warning btn-icon mr-2">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="19.53" height="19" viewBox="0 0 19.53 19">
+                                        <path id="Pencil" class="cls-1" d="M7466.45,1470.62l-5.27-5.13,0.44-.43a3.805,3.805,0,0,1,5.27,0,3.569,3.569,0,0,1,0,5.13Zm-3.46-5.08,3.41,3.32a2.39,2.39,0,0,0-.39-2.95A2.6,2.6,0,0,0,7462.99,1465.54Zm0.74,7.24-3.73-6.04,1.07-.63,3.73,6.04ZM7448.46,1483l1.85-6.76,1.2,0.31-1.3,4.75,4.89-1.26,0.32,1.17Zm7.97-2.67-1.47-3.65-3.75-1.43,7.72-7.58,0.88,0.85-6.39,6.27,2.5,0.96,0.98,2.42,5.18-5.01,0.88,0.85Z" transform="translate(-7448.47 -1464)"/>
+                                      </svg>
+                                </a>
+                                <a href="javascript:void(0);" class="btn btn-outline-danger btn-icon">
+                                    <i class="fal fa-times"></i>
+                                </a>
+                            </div>
+                        </td>
+                       
+                    </tr>
+                    <tr>
+                        <td>P10-09-202121<br><small class="text-muted">GA-201-5642</small></td>
+                        <td>
+                            <div class="" style="width: auto">
+                                <div class="badge-pill custom-danger">Illegal</div><small class="text-muted text-center mt-1">Report date</small>
+                            </div>
+                        </td>
+                        <td>Prepaid <br><small class="text-muted">ECG</small></td>
+                        <td>Unconfirmed <br><small class="text-muted">Test:</small></td>
+                        <td>
+                            Achimota <br><small class="text-muted">Greater Accra</small>
+                        </td>
+                        <td>
+                            Amoah Kofi <br><small class="text-muted">0202115566</small>
+                        </td>
+                        <td>
+                            Ataa Nii <br><small class="text-muted">0552548190</small>
+                        </td>
+                        <td>
+                            <button class="btn btn-secondary">Report</button>
+                        </td>
+                        <td>
+                            <button class="btn btn-primary">Statement</button>
+                        </td>
+                        <td>
+                            <div class="d-flex">
+                                <a href="javascript:void(0);" class="btn btn-outline-success btn-icon mr-2">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="19.88" height="14.5" viewBox="0 0 19.88 14.5">
+                                        <path id="Eye" class="cls-1" d="M7417.64,1472.56c-0.41-3.1-4.2-5.52-8.65-5.52h-0.1c-4.5.04-8.3,2.46-8.66,5.52l-1.23-.14c0.43-3.71,4.68-6.55,9.88-6.59h0.11c5.06,0,9.39,2.88,9.89,6.58Zm-8.75,7.79c-5.06,0-9.4-2.87-9.89-6.58l1.23-.15c0.41,3.11,4.21,5.52,8.66,5.52h0.1c4.5-.03,8.3-2.46,8.65-5.51l1.24,0.13c-0.43,3.72-4.68,6.55-9.88,6.59h-0.11Zm0.05-2.42a4.842,4.842,0,1,1,4.97-4.88,4.786,4.786,0,0,1-1.43,3.44,4.991,4.991,0,0,1-3.5,1.44h-0.04Zm0-8.47a3.631,3.631,0,1,0,0,7.26v0.61l0.03-.61a3.766,3.766,0,0,0,2.63-1.08,3.551,3.551,0,0,0,1.07-2.58A3.7,3.7,0,0,0,7408.94,1469.46Zm-2.49,3.65a2.463,2.463,0,0,1,2.47-2.44l0.01,1.21a1.242,1.242,0,0,0-1.24,1.22Z" transform="translate(-7399 -1465.84)"/>
+                                    </svg>
+                                </a>
+                                <a href="javascript:void(0);" class="btn btn-outline-warning btn-icon mr-2">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="19.53" height="19" viewBox="0 0 19.53 19">
+                                        <path id="Pencil" class="cls-1" d="M7466.45,1470.62l-5.27-5.13,0.44-.43a3.805,3.805,0,0,1,5.27,0,3.569,3.569,0,0,1,0,5.13Zm-3.46-5.08,3.41,3.32a2.39,2.39,0,0,0-.39-2.95A2.6,2.6,0,0,0,7462.99,1465.54Zm0.74,7.24-3.73-6.04,1.07-.63,3.73,6.04ZM7448.46,1483l1.85-6.76,1.2,0.31-1.3,4.75,4.89-1.26,0.32,1.17Zm7.97-2.67-1.47-3.65-3.75-1.43,7.72-7.58,0.88,0.85-6.39,6.27,2.5,0.96,0.98,2.42,5.18-5.01,0.88,0.85Z" transform="translate(-7448.47 -1464)"/>
+                                      </svg>
+                                </a>
+                                <a href="javascript:void(0);" class="btn btn-outline-danger btn-icon">
+                                    <i class="fal fa-times"></i>
+                                </a>
+                            </div>
+                        </td>
+                       
+                    </tr>
+                    <tr>
+                        <td>P10-09-202105<br><small class="text-muted">GA-201-5642</small></td>
+                        <td>
+                            <div class="" style="width: auto">
+                                <div class="badge-pill custom-success">Genuine</div><small class="text-muted text-center mt-1">Report date</small>
+                            </div>
+                        </td>
+                        <td>Prepaid(Smart) <br><small class="text-muted">Electrometer</small></td>
+                        <td>Good <br><small class="text-muted">Test: 21/10/21</small></td>
+                        <td>
+                            Legon <br><small class="text-muted">Greater Accra</small>
+                        </td>
+                        <td>
+                            Nii Alonte <br><small class="text-muted">0203457891</small>
+                        </td>
+                        <td>
+                            Aminata Musah <br><small class="text-muted">0202115566</small>
+                        </td>
+                        <td>
+                            <button class="btn btn-secondary">Report</button>
+                        </td>
+                        <td>
+                            <button class="btn btn-primary">Statement</button>
+                        </td>
+                        <td>
+                            <div class="d-flex">
+                                <a href="javascript:void(0);" class="btn btn-outline-success btn-icon mr-2">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="19.88" height="14.5" viewBox="0 0 19.88 14.5">
+                                        <path id="Eye" class="cls-1" d="M7417.64,1472.56c-0.41-3.1-4.2-5.52-8.65-5.52h-0.1c-4.5.04-8.3,2.46-8.66,5.52l-1.23-.14c0.43-3.71,4.68-6.55,9.88-6.59h0.11c5.06,0,9.39,2.88,9.89,6.58Zm-8.75,7.79c-5.06,0-9.4-2.87-9.89-6.58l1.23-.15c0.41,3.11,4.21,5.52,8.66,5.52h0.1c4.5-.03,8.3-2.46,8.65-5.51l1.24,0.13c-0.43,3.72-4.68,6.55-9.88,6.59h-0.11Zm0.05-2.42a4.842,4.842,0,1,1,4.97-4.88,4.786,4.786,0,0,1-1.43,3.44,4.991,4.991,0,0,1-3.5,1.44h-0.04Zm0-8.47a3.631,3.631,0,1,0,0,7.26v0.61l0.03-.61a3.766,3.766,0,0,0,2.63-1.08,3.551,3.551,0,0,0,1.07-2.58A3.7,3.7,0,0,0,7408.94,1469.46Zm-2.49,3.65a2.463,2.463,0,0,1,2.47-2.44l0.01,1.21a1.242,1.242,0,0,0-1.24,1.22Z" transform="translate(-7399 -1465.84)"/>
+                                    </svg>
+                                </a>
+                                <a href="javascript:void(0);" class="btn btn-outline-warning btn-icon mr-2">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="19.53" height="19" viewBox="0 0 19.53 19">
+                                        <path id="Pencil" class="cls-1" d="M7466.45,1470.62l-5.27-5.13,0.44-.43a3.805,3.805,0,0,1,5.27,0,3.569,3.569,0,0,1,0,5.13Zm-3.46-5.08,3.41,3.32a2.39,2.39,0,0,0-.39-2.95A2.6,2.6,0,0,0,7462.99,1465.54Zm0.74,7.24-3.73-6.04,1.07-.63,3.73,6.04ZM7448.46,1483l1.85-6.76,1.2,0.31-1.3,4.75,4.89-1.26,0.32,1.17Zm7.97-2.67-1.47-3.65-3.75-1.43,7.72-7.58,0.88,0.85-6.39,6.27,2.5,0.96,0.98,2.42,5.18-5.01,0.88,0.85Z" transform="translate(-7448.47 -1464)"/>
+                                      </svg>
+                                </a>
+                                <a href="javascript:void(0);" class="btn btn-outline-danger btn-icon">
+                                    <i class="fal fa-times"></i>
+                                </a>
+                            </div>
+                        </td>
+                       
+                    </tr>
+                    <tr>
+                        <td>P10-09-202105<br><small class="text-muted">GA-201-5642</small></td>
+                        <td>
+                            <div class="" style="width: auto">
+                                <div class="badge-pill custom-success">Genuine</div><small class="text-muted text-center mt-1">21/10/21 9:00am</small>
+                            </div>
+                        </td>
+                        <td>Prepaid <br><small class="text-muted">ECG</small></td>
+                        <td>Good <br><small class="text-muted">Test: 21/10/21</small></td>
+                        <td>
+                            Suame <br><small class="text-muted">Ahsanti</small>
+                        </td>
+                        <td>
+                            Okonori Yaa <br><small class="text-muted">0203457891</small>
+                        </td>
+                        <td>
+                           Abu Nii Quaye <br><small class="text-muted">0202115566</small>
+                        </td>
+                        <td>
+                            <button class="btn btn-secondary">Report</button>
+                        </td>
+                        <td>
+                            <button class="btn btn-primary">Statement</button>
+                        </td>
+                        <td>
+                            <div class="d-flex">
+                                <a href="javascript:void(0);" class="btn btn-outline-success btn-icon mr-2">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="19.88" height="14.5" viewBox="0 0 19.88 14.5">
+                                        <path id="Eye" class="cls-1" d="M7417.64,1472.56c-0.41-3.1-4.2-5.52-8.65-5.52h-0.1c-4.5.04-8.3,2.46-8.66,5.52l-1.23-.14c0.43-3.71,4.68-6.55,9.88-6.59h0.11c5.06,0,9.39,2.88,9.89,6.58Zm-8.75,7.79c-5.06,0-9.4-2.87-9.89-6.58l1.23-.15c0.41,3.11,4.21,5.52,8.66,5.52h0.1c4.5-.03,8.3-2.46,8.65-5.51l1.24,0.13c-0.43,3.72-4.68,6.55-9.88,6.59h-0.11Zm0.05-2.42a4.842,4.842,0,1,1,4.97-4.88,4.786,4.786,0,0,1-1.43,3.44,4.991,4.991,0,0,1-3.5,1.44h-0.04Zm0-8.47a3.631,3.631,0,1,0,0,7.26v0.61l0.03-.61a3.766,3.766,0,0,0,2.63-1.08,3.551,3.551,0,0,0,1.07-2.58A3.7,3.7,0,0,0,7408.94,1469.46Zm-2.49,3.65a2.463,2.463,0,0,1,2.47-2.44l0.01,1.21a1.242,1.242,0,0,0-1.24,1.22Z" transform="translate(-7399 -1465.84)"/>
+                                    </svg>
+                                </a>
+                                <a href="javascript:void(0);" class="btn btn-outline-warning btn-icon mr-2">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="19.53" height="19" viewBox="0 0 19.53 19">
+                                        <path id="Pencil" class="cls-1" d="M7466.45,1470.62l-5.27-5.13,0.44-.43a3.805,3.805,0,0,1,5.27,0,3.569,3.569,0,0,1,0,5.13Zm-3.46-5.08,3.41,3.32a2.39,2.39,0,0,0-.39-2.95A2.6,2.6,0,0,0,7462.99,1465.54Zm0.74,7.24-3.73-6.04,1.07-.63,3.73,6.04ZM7448.46,1483l1.85-6.76,1.2,0.31-1.3,4.75,4.89-1.26,0.32,1.17Zm7.97-2.67-1.47-3.65-3.75-1.43,7.72-7.58,0.88,0.85-6.39,6.27,2.5,0.96,0.98,2.42,5.18-5.01,0.88,0.85Z" transform="translate(-7448.47 -1464)"/>
+                                      </svg>
+                                </a>
+                                <a href="javascript:void(0);" class="btn btn-outline-danger btn-icon">
+                                    <i class="fal fa-times"></i>
+                                </a>
+                            </div>
+                        </td>
+                       
+                    </tr>
+                    <tr>
+                        <td>P10-09-202155<br><small class="text-muted">GA-201-5642</small></td>
+                        <td>
+                            <div class="" style="width: auto">
+                                <div class="badge-pill custom-success">Genuine</div><small class="text-muted text-center mt-1">21/10/21 9:00am</small>
+                            </div>
+                        </td>
+                        <td>Analog <br><small class="text-muted">SHEP</small></td>
+                        <td>Good <br><small class="text-muted">Test: 21/10/21</small></td>
+                        <td>
+                            Walewale <br><small class="text-muted">Upper East</small>
+                        </td>
+                        <td>
+                            Kwame Esuman <br><small class="text-muted">030222179</small>
+                        </td>
+                        <td>
+                           Opoku Bismark <br><small class="text-muted">0552548190</small>
+                        </td>
+                        <td>
+                            <button class="btn btn-secondary">Report</button>
+                        </td>
+                        <td>
+                            <button class="btn btn-primary">Statement</button>
+                        </td>
+                        <td>
+                            <div class="d-flex">
+                                <a href="javascript:void(0);" class="btn btn-outline-success btn-icon mr-2">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="19.88" height="14.5" viewBox="0 0 19.88 14.5">
+                                        <path id="Eye" class="cls-1" d="M7417.64,1472.56c-0.41-3.1-4.2-5.52-8.65-5.52h-0.1c-4.5.04-8.3,2.46-8.66,5.52l-1.23-.14c0.43-3.71,4.68-6.55,9.88-6.59h0.11c5.06,0,9.39,2.88,9.89,6.58Zm-8.75,7.79c-5.06,0-9.4-2.87-9.89-6.58l1.23-.15c0.41,3.11,4.21,5.52,8.66,5.52h0.1c4.5-.03,8.3-2.46,8.65-5.51l1.24,0.13c-0.43,3.72-4.68,6.55-9.88,6.59h-0.11Zm0.05-2.42a4.842,4.842,0,1,1,4.97-4.88,4.786,4.786,0,0,1-1.43,3.44,4.991,4.991,0,0,1-3.5,1.44h-0.04Zm0-8.47a3.631,3.631,0,1,0,0,7.26v0.61l0.03-.61a3.766,3.766,0,0,0,2.63-1.08,3.551,3.551,0,0,0,1.07-2.58A3.7,3.7,0,0,0,7408.94,1469.46Zm-2.49,3.65a2.463,2.463,0,0,1,2.47-2.44l0.01,1.21a1.242,1.242,0,0,0-1.24,1.22Z" transform="translate(-7399 -1465.84)"/>
+                                    </svg>
+                                </a>
+                                <a href="javascript:void(0);" class="btn btn-outline-warning btn-icon mr-2">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="19.53" height="19" viewBox="0 0 19.53 19">
+                                        <path id="Pencil" class="cls-1" d="M7466.45,1470.62l-5.27-5.13,0.44-.43a3.805,3.805,0,0,1,5.27,0,3.569,3.569,0,0,1,0,5.13Zm-3.46-5.08,3.41,3.32a2.39,2.39,0,0,0-.39-2.95A2.6,2.6,0,0,0,7462.99,1465.54Zm0.74,7.24-3.73-6.04,1.07-.63,3.73,6.04ZM7448.46,1483l1.85-6.76,1.2,0.31-1.3,4.75,4.89-1.26,0.32,1.17Zm7.97-2.67-1.47-3.65-3.75-1.43,7.72-7.58,0.88,0.85-6.39,6.27,2.5,0.96,0.98,2.42,5.18-5.01,0.88,0.85Z" transform="translate(-7448.47 -1464)"/>
+                                      </svg>
+                                </a>
+                                <a href="javascript:void(0);" class="btn btn-outline-danger btn-icon">
+                                    <i class="fal fa-times"></i>
+                                </a>
+                            </div>
+                        </td>
+                       
+                    </tr>
+                    <tr>
+                        <td>P10-09-202175<br><small class="text-muted">GA-201-5642</small></td>
+                        <td>
+                            <div class="" style="width: auto">
+                                <div class="badge-pill custom-danger">Illegal</div><small class="text-muted text-center mt-1">21/10/21 9:00am</small>
+                            </div>
+                        </td>
+                        <td>Pre-paid <br><small class="text-muted">SHEP</small></td>
+                        <td>Good <br><small class="text-muted">Test: 21/10/21</small></td>
+                        <td>
+                            Kasoa <br><small class="text-muted">Greater Accra</small>
+                        </td>
+                        <td>
+                            Fiifi Benson <br><small class="text-muted">0202115566</small>
+                        </td>
+                        <td>
+                           Nii Noi <br><small class="text-muted">030222179</small>
+                        </td>
+                        <td>
+                            <button class="btn btn-secondary">Report</button>
+                        </td>
+                        <td>
+                            <button class="btn btn-primary">Statement</button>
+                        </td>
+                        <td>
+                            <div class="d-flex">
+                                <a href="javascript:void(0);" class="btn btn-outline-success btn-icon mr-2">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="19.88" height="14.5" viewBox="0 0 19.88 14.5">
+                                        <path id="Eye" class="cls-1" d="M7417.64,1472.56c-0.41-3.1-4.2-5.52-8.65-5.52h-0.1c-4.5.04-8.3,2.46-8.66,5.52l-1.23-.14c0.43-3.71,4.68-6.55,9.88-6.59h0.11c5.06,0,9.39,2.88,9.89,6.58Zm-8.75,7.79c-5.06,0-9.4-2.87-9.89-6.58l1.23-.15c0.41,3.11,4.21,5.52,8.66,5.52h0.1c4.5-.03,8.3-2.46,8.65-5.51l1.24,0.13c-0.43,3.72-4.68,6.55-9.88,6.59h-0.11Zm0.05-2.42a4.842,4.842,0,1,1,4.97-4.88,4.786,4.786,0,0,1-1.43,3.44,4.991,4.991,0,0,1-3.5,1.44h-0.04Zm0-8.47a3.631,3.631,0,1,0,0,7.26v0.61l0.03-.61a3.766,3.766,0,0,0,2.63-1.08,3.551,3.551,0,0,0,1.07-2.58A3.7,3.7,0,0,0,7408.94,1469.46Zm-2.49,3.65a2.463,2.463,0,0,1,2.47-2.44l0.01,1.21a1.242,1.242,0,0,0-1.24,1.22Z" transform="translate(-7399 -1465.84)"/>
+                                    </svg>
+                                </a>
+                                <a href="javascript:void(0);" class="btn btn-outline-warning btn-icon mr-2">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="19.53" height="19" viewBox="0 0 19.53 19">
+                                        <path id="Pencil" class="cls-1" d="M7466.45,1470.62l-5.27-5.13,0.44-.43a3.805,3.805,0,0,1,5.27,0,3.569,3.569,0,0,1,0,5.13Zm-3.46-5.08,3.41,3.32a2.39,2.39,0,0,0-.39-2.95A2.6,2.6,0,0,0,7462.99,1465.54Zm0.74,7.24-3.73-6.04,1.07-.63,3.73,6.04ZM7448.46,1483l1.85-6.76,1.2,0.31-1.3,4.75,4.89-1.26,0.32,1.17Zm7.97-2.67-1.47-3.65-3.75-1.43,7.72-7.58,0.88,0.85-6.39,6.27,2.5,0.96,0.98,2.42,5.18-5.01,0.88,0.85Z" transform="translate(-7448.47 -1464)"/>
+                                      </svg>
+                                </a>
+                                <a href="javascript:void(0);" class="btn btn-outline-danger btn-icon">
+                                    <i class="fal fa-times"></i>
+                                </a>
+                            </div>
+                        </td>
+                       
+                    </tr>
+                    <tr>
+                        <td>P03-09-202166<br><small class="text-muted">GA-201-5642</small></td>
+                        <td>
+                            <div class="" style="width: auto">
+                                <div class="badge-pill custom-warning">Suspect</div><small class="text-muted text-center mt-1">21/10/21 9:00am</small>
+                            </div>
+                        </td>
+                        <td>Prepaid(Smart) <br><small class="text-muted">ECG</small></td>
+                        <td>Good <br><small class="text-muted">Test: 21/10/21</small></td>
+                        <td>
+                            Labone <br><small class="text-muted">Greater Accra</small>
+                        </td>
+                        <td>
+                            Amoah Kofi <br><small class="text-muted">0203457891</small>
+                        </td>
+                        <td>
+                           Anu Kojo <br><small class="text-muted">0202115566</small>
+                        </td>
+                        <td>
+                            <button class="btn btn-secondary">Report</button>
+                        </td>
+                        <td>
+                            <button class="btn btn-primary">Statement</button>
+                        </td>
+                        <td>
+                            <div class="d-flex">
+                                <a href="javascript:void(0);" class="btn btn-outline-success btn-icon mr-2">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="19.88" height="14.5" viewBox="0 0 19.88 14.5">
+                                        <path id="Eye" class="cls-1" d="M7417.64,1472.56c-0.41-3.1-4.2-5.52-8.65-5.52h-0.1c-4.5.04-8.3,2.46-8.66,5.52l-1.23-.14c0.43-3.71,4.68-6.55,9.88-6.59h0.11c5.06,0,9.39,2.88,9.89,6.58Zm-8.75,7.79c-5.06,0-9.4-2.87-9.89-6.58l1.23-.15c0.41,3.11,4.21,5.52,8.66,5.52h0.1c4.5-.03,8.3-2.46,8.65-5.51l1.24,0.13c-0.43,3.72-4.68,6.55-9.88,6.59h-0.11Zm0.05-2.42a4.842,4.842,0,1,1,4.97-4.88,4.786,4.786,0,0,1-1.43,3.44,4.991,4.991,0,0,1-3.5,1.44h-0.04Zm0-8.47a3.631,3.631,0,1,0,0,7.26v0.61l0.03-.61a3.766,3.766,0,0,0,2.63-1.08,3.551,3.551,0,0,0,1.07-2.58A3.7,3.7,0,0,0,7408.94,1469.46Zm-2.49,3.65a2.463,2.463,0,0,1,2.47-2.44l0.01,1.21a1.242,1.242,0,0,0-1.24,1.22Z" transform="translate(-7399 -1465.84)"/>
+                                    </svg>
+                                </a>
+                                <a href="javascript:void(0);" class="btn btn-outline-warning btn-icon mr-2">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="19.53" height="19" viewBox="0 0 19.53 19">
+                                        <path id="Pencil" class="cls-1" d="M7466.45,1470.62l-5.27-5.13,0.44-.43a3.805,3.805,0,0,1,5.27,0,3.569,3.569,0,0,1,0,5.13Zm-3.46-5.08,3.41,3.32a2.39,2.39,0,0,0-.39-2.95A2.6,2.6,0,0,0,7462.99,1465.54Zm0.74,7.24-3.73-6.04,1.07-.63,3.73,6.04ZM7448.46,1483l1.85-6.76,1.2,0.31-1.3,4.75,4.89-1.26,0.32,1.17Zm7.97-2.67-1.47-3.65-3.75-1.43,7.72-7.58,0.88,0.85-6.39,6.27,2.5,0.96,0.98,2.42,5.18-5.01,0.88,0.85Z" transform="translate(-7448.47 -1464)"/>
+                                      </svg>
+                                </a>
+                                <a href="javascript:void(0);" class="btn btn-outline-danger btn-icon">
+                                    <i class="fal fa-times"></i>
+                                </a>
+                            </div>
+                        </td>
+                       
+                    </tr>
+                    <tr>
+                        <td>P03-09-202194<br><small class="text-muted">GA-201-5642</small></td>
+                        <td>
+                            <div class="" style="width: auto">
+                                <div class="badge-pill custom-danger">Illegal</div><small class="text-muted text-center mt-1">21/10/21 9:00am</small>
+                            </div>
+                        </td>
+                        <td>Pre-paid <br><small class="text-muted">ECH</small></td>
+                        <td>Faulty <br><small class="text-muted">Test: 21/10/21</small></td>
+                        <td>
+                            Prampram <br><small class="text-muted">Brong Ahafo</small>
+                        </td>
+                        <td>
+                            Koo Nimo <br><small class="text-muted">0552548190</small>
+                        </td>
+                        <td>
+                           Boamah Fred <br><small class="text-muted">0203457891</small>
+                        </td>
+                        <td>
+                            <button class="btn btn-secondary">Report</button>
+                        </td>
+                        <td>
+                            <button class="btn btn-primary">Statement</button>
+                        </td>
+                        <td>
+                            <div class="d-flex">
+                                <a href="javascript:void(0);" class="btn btn-outline-success btn-icon mr-2">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="19.88" height="14.5" viewBox="0 0 19.88 14.5">
+                                        <path id="Eye" class="cls-1" d="M7417.64,1472.56c-0.41-3.1-4.2-5.52-8.65-5.52h-0.1c-4.5.04-8.3,2.46-8.66,5.52l-1.23-.14c0.43-3.71,4.68-6.55,9.88-6.59h0.11c5.06,0,9.39,2.88,9.89,6.58Zm-8.75,7.79c-5.06,0-9.4-2.87-9.89-6.58l1.23-.15c0.41,3.11,4.21,5.52,8.66,5.52h0.1c4.5-.03,8.3-2.46,8.65-5.51l1.24,0.13c-0.43,3.72-4.68,6.55-9.88,6.59h-0.11Zm0.05-2.42a4.842,4.842,0,1,1,4.97-4.88,4.786,4.786,0,0,1-1.43,3.44,4.991,4.991,0,0,1-3.5,1.44h-0.04Zm0-8.47a3.631,3.631,0,1,0,0,7.26v0.61l0.03-.61a3.766,3.766,0,0,0,2.63-1.08,3.551,3.551,0,0,0,1.07-2.58A3.7,3.7,0,0,0,7408.94,1469.46Zm-2.49,3.65a2.463,2.463,0,0,1,2.47-2.44l0.01,1.21a1.242,1.242,0,0,0-1.24,1.22Z" transform="translate(-7399 -1465.84)"/>
+                                    </svg>
+                                </a>
+                                <a href="javascript:void(0);" class="btn btn-outline-warning btn-icon mr-2">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="19.53" height="19" viewBox="0 0 19.53 19">
+                                        <path id="Pencil" class="cls-1" d="M7466.45,1470.62l-5.27-5.13,0.44-.43a3.805,3.805,0,0,1,5.27,0,3.569,3.569,0,0,1,0,5.13Zm-3.46-5.08,3.41,3.32a2.39,2.39,0,0,0-.39-2.95A2.6,2.6,0,0,0,7462.99,1465.54Zm0.74,7.24-3.73-6.04,1.07-.63,3.73,6.04ZM7448.46,1483l1.85-6.76,1.2,0.31-1.3,4.75,4.89-1.26,0.32,1.17Zm7.97-2.67-1.47-3.65-3.75-1.43,7.72-7.58,0.88,0.85-6.39,6.27,2.5,0.96,0.98,2.42,5.18-5.01,0.88,0.85Z" transform="translate(-7448.47 -1464)"/>
+                                      </svg>
+                                </a>
+                                <a href="javascript:void(0);" class="btn btn-outline-danger btn-icon">
+                                    <i class="fal fa-times"></i>
+                                </a>
+                            </div>
+                        </td>
+                       
+                    </tr>
+                    <tr>
+                        <td>P03-09-202107<br><small class="text-muted">GA-201-5642</small></td>
+                        <td>
+                            <div class="" style="width: auto">
+                                <div class="badge-pill custom-success">Genuine</div><small class="text-muted text-center mt-1">21/10/21 9:00am</small>
+                            </div>
+                        </td>
+                        <td>Pre-paid <br><small class="text-muted">ECG</small></td>
+                        <td>Unconfirmed <br><small class="text-muted">Test: </small></td>
+                        <td>
+                            Ok <br><small class="text-muted">Greater Accra</small>
+                        </td>
+                        <td>
+                            Ataa Nii <br><small class="text-muted">0302222179</small>
+                        </td>
+                        <td>
+                           Sylvester Kpodo <br><small class="text-muted">0552548190</small>
+                        </td>
+                        <td>
+                            <button class="btn btn-secondary">Report</button>
+                        </td>
+                        <td>
+                            <button class="btn btn-primary">Statement</button>
+                        </td>
+                        <td>
+                            <div class="d-flex">
+                                <a href="javascript:void(0);" class="btn btn-outline-success btn-icon mr-2">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="19.88" height="14.5" viewBox="0 0 19.88 14.5">
+                                        <path id="Eye" class="cls-1" d="M7417.64,1472.56c-0.41-3.1-4.2-5.52-8.65-5.52h-0.1c-4.5.04-8.3,2.46-8.66,5.52l-1.23-.14c0.43-3.71,4.68-6.55,9.88-6.59h0.11c5.06,0,9.39,2.88,9.89,6.58Zm-8.75,7.79c-5.06,0-9.4-2.87-9.89-6.58l1.23-.15c0.41,3.11,4.21,5.52,8.66,5.52h0.1c4.5-.03,8.3-2.46,8.65-5.51l1.24,0.13c-0.43,3.72-4.68,6.55-9.88,6.59h-0.11Zm0.05-2.42a4.842,4.842,0,1,1,4.97-4.88,4.786,4.786,0,0,1-1.43,3.44,4.991,4.991,0,0,1-3.5,1.44h-0.04Zm0-8.47a3.631,3.631,0,1,0,0,7.26v0.61l0.03-.61a3.766,3.766,0,0,0,2.63-1.08,3.551,3.551,0,0,0,1.07-2.58A3.7,3.7,0,0,0,7408.94,1469.46Zm-2.49,3.65a2.463,2.463,0,0,1,2.47-2.44l0.01,1.21a1.242,1.242,0,0,0-1.24,1.22Z" transform="translate(-7399 -1465.84)"/>
+                                    </svg>
+                                </a>
+                                <a href="javascript:void(0);" class="btn btn-outline-warning btn-icon mr-2">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="19.53" height="19" viewBox="0 0 19.53 19">
+                                        <path id="Pencil" class="cls-1" d="M7466.45,1470.62l-5.27-5.13,0.44-.43a3.805,3.805,0,0,1,5.27,0,3.569,3.569,0,0,1,0,5.13Zm-3.46-5.08,3.41,3.32a2.39,2.39,0,0,0-.39-2.95A2.6,2.6,0,0,0,7462.99,1465.54Zm0.74,7.24-3.73-6.04,1.07-.63,3.73,6.04ZM7448.46,1483l1.85-6.76,1.2,0.31-1.3,4.75,4.89-1.26,0.32,1.17Zm7.97-2.67-1.47-3.65-3.75-1.43,7.72-7.58,0.88,0.85-6.39,6.27,2.5,0.96,0.98,2.42,5.18-5.01,0.88,0.85Z" transform="translate(-7448.47 -1464)"/>
+                                      </svg>
+                                </a>
+                                <a href="javascript:void(0);" class="btn btn-outline-danger btn-icon">
+                                    <i class="fal fa-times"></i>
+                                </a>
+                            </div>
+                        </td>
+                       
+                    </tr>
+                </tbody>
+                
+               
+            </table>
+        </div>
+
+        <div id="connected-meters"class="custom-tile mt-2" style="margin-bottom: 12rem; margin-left: 1rem; margin-right: 2rem; padding-left: 1.5rem; padding-right: 1.5rem; padding-top: 2rem !important;" class="">
+            <div class="connected-meters-wrapper">
+                <h1 class="tile-headers">Connected Meters (TR212054A2)</h1>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="count-tiles-wrapper">
+                            <div class="row">
+                                <div class="col-sm-6 col-lg">
+                                    <div class="p-3 gkb-tile-files-uploaded rounded overflow-hidden position-relative text-white mb-g">
+                                        <div class="card-counter">
+                                            <h3 class=" display-4 d-block l-h-n m-0 fw-300">
+                                                <span class="count-numbers">200</span>
+                                                <small class="m-0 l-h-n">Connected Meters</small>
+                                            </h3>
+                                        </div>
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="32" viewBox="0 0 24 32" class="tab-icon">
+                                            <path id="Tablet" class="cls-1" d="M551.35,1937.5v-28h2v26h20v-26h2v28h-24Zm0-30v-2h24v2h-24Zm11,26v-2h2v2h-2Zm-7-4v-20h16v20h-16Zm2-18v16h12v-16h-12Z" transform="translate(-551.344 -1905.5)"/>
+                                          </svg>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6 col-lg">
+                                    <div class="p-3 gkb-tile-files-uploaded rounded overflow-hidden position-relative text-white mb-g">
+                                        <div class="card-counter">
+                                            <h3 class=" display-4 d-block l-h-n m-0 fw-300">
+                                                <span class="count-numbers">35</span>
+                                                <small class="m-0 l-h-n">Flagged Meters</small>
+                                            </h3>
+                                        </div>
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="23.972" height="32" viewBox="0 0 23.972 32" class="tab-icon">
+                                            <path id="Flag" class="cls-1" d="M1000.43,1937.48h-1.994v-32h1.994v32Zm7.19-10.08a11.392,11.392,0,0,1-4.59-1l0.8-1.83c3.33,1.45,5.75.72,8.31-.05,2.34-.7,4.96-1.49,8.28-0.47v-13.9c-3.02-1.11-5.3-.43-7.71.29-2.66.8-5.68,1.71-9.68-.04l0.8-1.83c3.33,1.45,5.75.72,8.31-.05,2.66-.8,5.68-1.7,9.68.04l0.6,0.27v18.18l-1.4-.61c-3.33-1.45-5.74-.73-8.31.04A17.311,17.311,0,0,1,1007.62,1927.4Z" transform="translate(-998.438 -1905.47)"/>
+                                          </svg>
+                                          
+                                    </div>
+                                </div>
+                                <div class="col-sm-6 col-lg">
+                                    <div class="p-3 gkb-tile-files-uploaded rounded overflow-hidden position-relative text-white mb-g">
+                                        <div class="">
+                                            <h3 class="display-4 d-block l-h-n m-0 fw-300">
+                                                <span class="count-numbers">90</span>
+                                                <small class="m-0 l-h-n">Illegal Meters</small>
+                                            </h3>
+                                        </div>
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" class="tab-icon">
+                                            <path id="Unlinked" class="cls-1" d="M607.514,271.171m11.313,11.314,0.707,0.707-1.414-1.414,3.829-3.828a7,7,0,0,0-9.9-9.9l-3.829,3.828-1.414-1.414,3.829-3.828a9,9,0,0,1,12.728,12.728Zm-7.048,5.635-11.313-11.314M603,296a9,9,0,0,1-6.363-15.36l3.829-3.83,1.414,1.414-3.829,3.83a7,7,0,0,0,9.9,9.9l3.829-3.83,1.414,1.414-3.829,3.83A8.969,8.969,0,0,1,603,296Zm3.293-18.29-8-8,1.414-1.414,8,8Zm14,14-8-8,1.414-1.414,8,8Z" transform="translate(-594 -264)"/>
+                                          </svg>
+                                          
+                                    </div>
+                                </div>
+                                <div class="col-sm-6 col-lg">
+                                    <div class="p-3 gkb-tile-files-uploaded rounded overflow-hidden position-relative text-white mb-g">
+                                        <div class="">
+                                            <h3 class="display-4 d-block l-h-n m-0 fw-300">
+                                                <span class="count-numbers">&#162;71,000</span>
+                                                <small class="m-0 l-h-n">Power consumed</small>
+                                            </h3>
+                                        </div>
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="31.97" viewBox="0 0 20 31.97" class="tab-icon">
+                                            <path id="Bulb" class="cls-1" d="M790.855,2168.37l-1.786-.9,2.532-4.9a8,8,0,1,0-11.315,0l0.115,0.12,2.405,4.78-1.788.9-2.261-4.5a10,10,0,1,1,14.374,0Zm-8.79,3.51-0.242-1.99,8-.97,0.238,1.99Zm0,3-0.242-1.99,8-.97,0.238,1.99Zm3.855,4.03a3,3,0,0,1-3-3h2a1,1,0,0,0,2,0h2A3,3,0,0,1,785.92,2178.91Zm-3.976-22h-2a6.014,6.014,0,0,1,6-6v2A4.008,4.008,0,0,0,781.944,2156.91Z" transform="translate(-775.938 -2146.94)"/>
+                                          </svg>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6 col-lg">
+                                    <div class="p-3 gkb-tile-files-uploaded rounded overflow-hidden position-relative text-white mb-g">
+                                        <div class="">
+                                            <h3 class="display-4 d-block l-h-n m-0 fw-300">
+                                                <span class="count-numbers">&#162;40,500</span>
+                                                <small class="m-0 l-h-n">Amount paid</small>
+                                            </h3>
+                                        </div>
+                                        <i class="fal fa-microphone-alt  position-absolute tab-icon opacity-15"></i>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6 col-lg">
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <table id="dt-connected-meters" class="table table-bordered table-hover w-100">
+                    <thead>
+                        <tr>
+                            <th>Meter No.</th>
+                            <th>Meter Type</th>
+                            <th>Status</th>
+                            <th>Current User</th>
+                            <th>Month-1</th>
+                            <th>Month-2</th>
+                            <th>Month-3</th>
+                            <th>Month-4</th>
+                            <th>Month-5</th>
+                            <th>Month-6</th>
+                            <th>Analysis</th>
+                            <th>Manage</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>P010-202115<br><small class="text-muted">Ghana Post Address</small></td>
+                            <td>Prepaid <br><small class="text-muted">ECG (Provider)</small></td>
+                            <td>
+                                <div class="" style="width: auto">
+                                    <div class="badge-pill custom-danger">Illegal</div><small class="text-muted text-center mt-1">Report date</small>
+                                </div>
+                            </td>
+                            <td>Kwame Esuman <br><small class="text-muted"><strong>0552548190</strong></small></td>
+                            <td>&#162;50 <br><small class="text-muted">buy date</small></td>
+                            <td>
+                                &#162;60 <br><small class="text-muted">21/10/21</small>
+                            </td>
+                            <td>
+                                &#162;70 <br><small class="text-muted">21/10/21</small>
+                            </td>
+                            <td>
+                                &#162;60 <br><small class="text-muted">21/10/21</small>
+                            </td>
+                            <td>
+                                &#162;50 <br><small class="text-muted">21/10/21</small>
+                            </td>
+                            <td>
+                                &#162;50 <br><small class="text-muted">21/10/21</small>
+                            </td>
+                            <td>
+                                <div class="" style="width: auto">
+                                    <div class="badge-pill custom-danger mx-auto">Irregular</div><small class="text-muted text-center mt-1">Checkup</small>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="d-flex">
+                                    <a href="javascript:void(0);" class="btn btn-outline-warning btn-icon mr-2">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="19.53" height="19" viewBox="0 0 19.53 19">
+                                            <path id="Pencil" class="cls-1" d="M7466.45,1470.62l-5.27-5.13,0.44-.43a3.805,3.805,0,0,1,5.27,0,3.569,3.569,0,0,1,0,5.13Zm-3.46-5.08,3.41,3.32a2.39,2.39,0,0,0-.39-2.95A2.6,2.6,0,0,0,7462.99,1465.54Zm0.74,7.24-3.73-6.04,1.07-.63,3.73,6.04ZM7448.46,1483l1.85-6.76,1.2,0.31-1.3,4.75,4.89-1.26,0.32,1.17Zm7.97-2.67-1.47-3.65-3.75-1.43,7.72-7.58,0.88,0.85-6.39,6.27,2.5,0.96,0.98,2.42,5.18-5.01,0.88,0.85Z" transform="translate(-7448.47 -1464)"/>
+                                        </svg>
+                                    </a>
+                                    <a href="javascript:void(0);" class="btn btn-outline-danger btn-icon">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="19.53" height="19" viewBox="0 0 23.972 32">
+                                            <path id="Flag" class="cls-1" d="M1000.43,1937.48h-1.994v-32h1.994v32Zm7.19-10.08a11.392,11.392,0,0,1-4.59-1l0.8-1.83c3.33,1.45,5.75.72,8.31-.05,2.34-.7,4.96-1.49,8.28-0.47v-13.9c-3.02-1.11-5.3-.43-7.71.29-2.66.8-5.68,1.71-9.68-.04l0.8-1.83c3.33,1.45,5.75.72,8.31-.05,2.66-.8,5.68-1.7,9.68.04l0.6,0.27v18.18l-1.4-.61c-3.33-1.45-5.74-.73-8.31.04A17.311,17.311,0,0,1,1007.62,1927.4Z" transform="translate(-998.438 -1905.47)"/>
+                                          </svg>
+                                    </a>
+                                </div>
+                            </td>
+                        
+                        </tr>
+                        <tr>
+                            <td>P20-09-202135<br><small class="text-muted">GA-201-5642</small></td>
+                            <td>Analog <br><small class="text-muted">ECG</small></td>
+                            <td>
+                                <div class="" style="width: auto">
+                                    <div class="badge-pill custom-warning">Suspect</div><small class="text-muted text-center mt-1">21/10/21</small>
+                                </div>
+                            </td>
+                            <td>Fiifi Benson <br><small class="text-muted"><strong>0302221790</strong></small></td>
+                            <td>&#162;200 <br><small class="text-muted">buy date</small></td>
+                            <td>
+                                &#162;210 <br><small class="text-muted">21/10/21</small>
+                            </td>
+                            <td>
+                                &#162;200 <br><small class="text-muted">21/10/21</small>
+                            </td>
+                            <td>
+                                &#162;210 <br><small class="text-muted">21/10/21</small>
+                            </td>
+                            <td>
+                                &#162;200 <br><small class="text-muted">21/10/21</small>
+                            </td>
+                            <td>
+                                &#162;200 <br><small class="text-muted">21/10/21</small>
+                            </td>
+                            <td>
+                                <div class="" style="width: auto">
+                                    <div class="badge-pill custom-warning mx-auto">Average</div><small class="text-muted text-center mt-1">Investigate</small>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="d-flex">
+                                    <a href="javascript:void(0);" class="btn btn-outline-warning btn-icon mr-2">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="19.53" height="19" viewBox="0 0 19.53 19">
+                                            <path id="Pencil" class="cls-1" d="M7466.45,1470.62l-5.27-5.13,0.44-.43a3.805,3.805,0,0,1,5.27,0,3.569,3.569,0,0,1,0,5.13Zm-3.46-5.08,3.41,3.32a2.39,2.39,0,0,0-.39-2.95A2.6,2.6,0,0,0,7462.99,1465.54Zm0.74,7.24-3.73-6.04,1.07-.63,3.73,6.04ZM7448.46,1483l1.85-6.76,1.2,0.31-1.3,4.75,4.89-1.26,0.32,1.17Zm7.97-2.67-1.47-3.65-3.75-1.43,7.72-7.58,0.88,0.85-6.39,6.27,2.5,0.96,0.98,2.42,5.18-5.01,0.88,0.85Z" transform="translate(-7448.47 -1464)"/>
+                                        </svg>
+                                    </a>
+                                    <a href="javascript:void(0);" class="btn btn-outline-danger btn-icon">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="19.53" height="19" viewBox="0 0 23.972 32">
+                                            <path id="Flag" class="cls-1" d="M1000.43,1937.48h-1.994v-32h1.994v32Zm7.19-10.08a11.392,11.392,0,0,1-4.59-1l0.8-1.83c3.33,1.45,5.75.72,8.31-.05,2.34-.7,4.96-1.49,8.28-0.47v-13.9c-3.02-1.11-5.3-.43-7.71.29-2.66.8-5.68,1.71-9.68-.04l0.8-1.83c3.33,1.45,5.75.72,8.31-.05,2.66-.8,5.68-1.7,9.68.04l0.6,0.27v18.18l-1.4-.61c-3.33-1.45-5.74-.73-8.31.04A17.311,17.311,0,0,1,1007.62,1927.4Z" transform="translate(-998.438 -1905.47)"/>
+                                          </svg>
+                                    </a>
+                                </div>
+                            </td>
+                        
+                        </tr>
+                        <tr>
+                            <td>P10-09-202121<br><small class="text-muted">GA-201-5642</small></td>
+                            <td>Pre-paid <br><small class="text-muted">ECG</small></td>
+                            <td>
+                                <div class="" style="width: auto">
+                                    <div class="badge-pill custom-danger">Illegal</div><small class="text-muted text-center mt-1">21/10/21</small>
+                                </div>
+                            </td>
+                            <td>Amoah Kofi <br><small class="text-muted"><strong>0202115566</strong></small></td>
+                            <td>&#162;20 <br><small class="text-muted">21/10/21</small></td>
+                            <td>
+                                &#162;30 <br><small class="text-muted">21/10/21</small>
+                            </td>
+                            <td>
+                                &#162;20 <br><small class="text-muted">21/10/21</small>
+                            </td>
+                            <td>
+                                &#162;30 <br><small class="text-muted">21/10/21</small>
+                            </td>
+                            <td>
+                                &#162;20 <br><small class="text-muted">21/10/21</small>
+                            </td>
+                            <td>
+                                &#162;20 <br><small class="text-muted">21/10/21</small>
+                            </td>
+                            <td>
+                                <div class="" style="width: auto">
+                                    <div class="badge-pill custom-danger mx-auto">Irregular</div><small class="text-muted text-center mt-1">Checkup</small>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="d-flex">
+                                    <a href="javascript:void(0);" class="btn btn-outline-warning btn-icon mr-2">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="19.53" height="19" viewBox="0 0 19.53 19">
+                                            <path id="Pencil" class="cls-1" d="M7466.45,1470.62l-5.27-5.13,0.44-.43a3.805,3.805,0,0,1,5.27,0,3.569,3.569,0,0,1,0,5.13Zm-3.46-5.08,3.41,3.32a2.39,2.39,0,0,0-.39-2.95A2.6,2.6,0,0,0,7462.99,1465.54Zm0.74,7.24-3.73-6.04,1.07-.63,3.73,6.04ZM7448.46,1483l1.85-6.76,1.2,0.31-1.3,4.75,4.89-1.26,0.32,1.17Zm7.97-2.67-1.47-3.65-3.75-1.43,7.72-7.58,0.88,0.85-6.39,6.27,2.5,0.96,0.98,2.42,5.18-5.01,0.88,0.85Z" transform="translate(-7448.47 -1464)"/>
+                                        </svg>
+                                    </a>
+                                    <a href="javascript:void(0);" class="btn btn-outline-danger btn-icon">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="19.53" height="19" viewBox="0 0 23.972 32">
+                                            <path id="Flag" class="cls-1" d="M1000.43,1937.48h-1.994v-32h1.994v32Zm7.19-10.08a11.392,11.392,0,0,1-4.59-1l0.8-1.83c3.33,1.45,5.75.72,8.31-.05,2.34-.7,4.96-1.49,8.28-0.47v-13.9c-3.02-1.11-5.3-.43-7.71.29-2.66.8-5.68,1.71-9.68-.04l0.8-1.83c3.33,1.45,5.75.72,8.31-.05,2.66-.8,5.68-1.7,9.68.04l0.6,0.27v18.18l-1.4-.61c-3.33-1.45-5.74-.73-8.31.04A17.311,17.311,0,0,1,1007.62,1927.4Z" transform="translate(-998.438 -1905.47)"/>
+                                          </svg>
+                                    </a>
+                                </div>
+                            </td>
+                        
+                        </tr>
+                        <tr>
+                            <td>P010-202100<br><small class="text-muted">GA-201-5642</small></td>
+                            <td>Prepaid(Smart) <br><small class="text-muted">Electrometer</small></td>
+                            <td>
+                                <div class="" style="width: auto">
+                                    <div class="badge-pill custom-success">Genuine</div><small class="text-muted text-center mt-1">21/10/21</small>
+                                </div>
+                            </td>
+                            <td>Nii Alonte <br><small class="text-muted"><strong>0203457891</strong></small></td>
+                            <td>&#162;100 <br><small class="text-muted">21/10/21</small></td>
+                            <td>
+                                &#162;110 <br><small class="text-muted">21/10/21</small>
+                            </td>
+                            <td>
+                                &#162;110 <br><small class="text-muted">21/10/21</small>
+                            </td>
+                            <td>
+                                &#162;110 <br><small class="text-muted">21/10/21</small>
+                            </td>
+                            <td>
+                                &#162;100 <br><small class="text-muted">21/10/21</small>
+                            </td>
+                            <td>
+                                &#162;100 <br><small class="text-muted">21/10/21</small>
+                            </td>
+                            <td>
+                                <div class="" style="width: auto">
+                                    <div class="badge-pill custom-success mx-auto">Good</div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="d-flex">
+                                    <a href="javascript:void(0);" class="btn btn-outline-warning btn-icon mr-2">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="19.53" height="19" viewBox="0 0 19.53 19">
+                                            <path id="Pencil" class="cls-1" d="M7466.45,1470.62l-5.27-5.13,0.44-.43a3.805,3.805,0,0,1,5.27,0,3.569,3.569,0,0,1,0,5.13Zm-3.46-5.08,3.41,3.32a2.39,2.39,0,0,0-.39-2.95A2.6,2.6,0,0,0,7462.99,1465.54Zm0.74,7.24-3.73-6.04,1.07-.63,3.73,6.04ZM7448.46,1483l1.85-6.76,1.2,0.31-1.3,4.75,4.89-1.26,0.32,1.17Zm7.97-2.67-1.47-3.65-3.75-1.43,7.72-7.58,0.88,0.85-6.39,6.27,2.5,0.96,0.98,2.42,5.18-5.01,0.88,0.85Z" transform="translate(-7448.47 -1464)"/>
+                                        </svg>
+                                    </a>
+                                    <a href="javascript:void(0);" class="btn btn-outline-danger btn-icon">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="19.53" height="19" viewBox="0 0 23.972 32">
+                                            <path id="Flag" class="cls-1" d="M1000.43,1937.48h-1.994v-32h1.994v32Zm7.19-10.08a11.392,11.392,0,0,1-4.59-1l0.8-1.83c3.33,1.45,5.75.72,8.31-.05,2.34-.7,4.96-1.49,8.28-0.47v-13.9c-3.02-1.11-5.3-.43-7.71.29-2.66.8-5.68,1.71-9.68-.04l0.8-1.83c3.33,1.45,5.75.72,8.31-.05,2.66-.8,5.68-1.7,9.68.04l0.6,0.27v18.18l-1.4-.61c-3.33-1.45-5.74-.73-8.31.04A17.311,17.311,0,0,1,1007.62,1927.4Z" transform="translate(-998.438 -1905.47)"/>
+                                          </svg>
+                                    </a>
+                                </div>
+                            </td>
+                        
+                        </tr>
+                        <tr>
+                            <td>P010-202105<br><small class="text-muted">GA-201-5642</small></td>
+                            <td>Pre-paid <br><small class="text-muted">ECG</small></td>
+                            <td>
+                                <div class="" style="width: auto">
+                                    <div class="badge-pill custom-success">Genuine</div><small class="text-muted text-center mt-1">21/10/21</small>
+                                </div>
+                            </td>
+                            <td>Okonori Yaa <br><small class="text-muted"><strong>0552548190</strong></small></td>
+                            <td>&#162;60 <br><small class="text-muted">21/10/21</small></td>
+                            <td>
+                                &#162;70 <br><small class="text-muted">21/10/21</small>
+                            </td>
+                            <td>
+                                &#162;60 <br><small class="text-muted">21/10/21</small>
+                            </td>
+                            <td>
+                                &#162;70 <br><small class="text-muted">21/10/21</small>
+                            </td>
+                            <td>
+                                &#162;60 <br><small class="text-muted">21/10/21</small>
+                            </td>
+                            <td>
+                                &#162;60 <br><small class="text-muted">21/10/21</small>
+                            </td>
+                            <td>
+                                <div class="" style="width: auto">
+                                    <div class="badge-pill custom-success mx-auto">Good</div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="d-flex">
+                                    <a href="javascript:void(0);" class="btn btn-outline-warning btn-icon mr-2">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="19.53" height="19" viewBox="0 0 19.53 19">
+                                            <path id="Pencil" class="cls-1" d="M7466.45,1470.62l-5.27-5.13,0.44-.43a3.805,3.805,0,0,1,5.27,0,3.569,3.569,0,0,1,0,5.13Zm-3.46-5.08,3.41,3.32a2.39,2.39,0,0,0-.39-2.95A2.6,2.6,0,0,0,7462.99,1465.54Zm0.74,7.24-3.73-6.04,1.07-.63,3.73,6.04ZM7448.46,1483l1.85-6.76,1.2,0.31-1.3,4.75,4.89-1.26,0.32,1.17Zm7.97-2.67-1.47-3.65-3.75-1.43,7.72-7.58,0.88,0.85-6.39,6.27,2.5,0.96,0.98,2.42,5.18-5.01,0.88,0.85Z" transform="translate(-7448.47 -1464)"/>
+                                        </svg>
+                                    </a>
+                                    <a href="javascript:void(0);" class="btn btn-outline-danger btn-icon">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="19.53" height="19" viewBox="0 0 23.972 32">
+                                            <path id="Flag" class="cls-1" d="M1000.43,1937.48h-1.994v-32h1.994v32Zm7.19-10.08a11.392,11.392,0,0,1-4.59-1l0.8-1.83c3.33,1.45,5.75.72,8.31-.05,2.34-.7,4.96-1.49,8.28-0.47v-13.9c-3.02-1.11-5.3-.43-7.71.29-2.66.8-5.68,1.71-9.68-.04l0.8-1.83c3.33,1.45,5.75.72,8.31-.05,2.66-.8,5.68-1.7,9.68.04l0.6,0.27v18.18l-1.4-.61c-3.33-1.45-5.74-.73-8.31.04A17.311,17.311,0,0,1,1007.62,1927.4Z" transform="translate(-998.438 -1905.47)"/>
+                                          </svg>
+                                    </a>
+                                </div>
+                            </td>
+                        
+                        </tr>
+                        <tr>
+                            <td>P10-09-202155<br><small class="text-muted">GA-201-5642</small></td>
+                            <td>Analog <br><small class="text-muted">SHEP</small></td>
+                            <td>
+                                <div class="" style="width: auto">
+                                    <div class="badge-pill custom-success">Genuine</div><small class="text-muted text-center mt-1">21/10/21</small>
+                                </div>
+                            </td>
+                            <td>Kwame Esuman <br><small class="text-muted"><strong>030222179</strong></small></td>
+                            <td>&#162;3000 <br><small class="text-muted">21/10/21</small></td>
+                            <td>
+                                &#162;3100 <br><small class="text-muted">21/10/21</small>
+                            </td>
+                            <td>
+                                &#162;3000 <br><small class="text-muted">21/10/21</small>
+                            </td>
+                            <td>
+                                &#162;3100 <br><small class="text-muted">21/10/21</small>
+                            </td>
+                            <td>
+                                &#162;3000 <br><small class="text-muted">21/10/21</small>
+                            </td>
+                            <td>
+                                &#162;3000 <br><small class="text-muted">21/10/21</small>
+                            </td>
+                            <td>
+                                <div class="" style="width: auto">
+                                    <div class="badge-pill custom-success mx-auto">Good</div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="d-flex">
+                                    <a href="javascript:void(0);" class="btn btn-outline-warning btn-icon mr-2">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="19.53" height="19" viewBox="0 0 19.53 19">
+                                            <path id="Pencil" class="cls-1" d="M7466.45,1470.62l-5.27-5.13,0.44-.43a3.805,3.805,0,0,1,5.27,0,3.569,3.569,0,0,1,0,5.13Zm-3.46-5.08,3.41,3.32a2.39,2.39,0,0,0-.39-2.95A2.6,2.6,0,0,0,7462.99,1465.54Zm0.74,7.24-3.73-6.04,1.07-.63,3.73,6.04ZM7448.46,1483l1.85-6.76,1.2,0.31-1.3,4.75,4.89-1.26,0.32,1.17Zm7.97-2.67-1.47-3.65-3.75-1.43,7.72-7.58,0.88,0.85-6.39,6.27,2.5,0.96,0.98,2.42,5.18-5.01,0.88,0.85Z" transform="translate(-7448.47 -1464)"/>
+                                        </svg>
+                                    </a>
+                                    <a href="javascript:void(0);" class="btn btn-outline-danger btn-icon">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="19.53" height="19" viewBox="0 0 23.972 32">
+                                            <path id="Flag" class="cls-1" d="M1000.43,1937.48h-1.994v-32h1.994v32Zm7.19-10.08a11.392,11.392,0,0,1-4.59-1l0.8-1.83c3.33,1.45,5.75.72,8.31-.05,2.34-.7,4.96-1.49,8.28-0.47v-13.9c-3.02-1.11-5.3-.43-7.71.29-2.66.8-5.68,1.71-9.68-.04l0.8-1.83c3.33,1.45,5.75.72,8.31-.05,2.66-.8,5.68-1.7,9.68.04l0.6,0.27v18.18l-1.4-.61c-3.33-1.45-5.74-.73-8.31.04A17.311,17.311,0,0,1,1007.62,1927.4Z" transform="translate(-998.438 -1905.47)"/>
+                                          </svg>
+                                    </a>
+                                </div>
+                            </td>
+                        
+                        </tr>
+                        <tr>
+                            <td>P10-09-202175<br><small class="text-muted">GA-201-5642</small></td>
+                            <td>Pre-paid <br><small class="text-muted">SHEP</small></td>
+                            <td>
+                                <div class="" style="width: auto">
+                                    <div class="badge-pill custom-danger">Illegal</div><small class="text-muted text-center mt-1">21/10/21</small>
+                                </div>
+                            </td>
+                            <td>Fiifi Benson <br><small class="text-muted"><strong>0202115566</strong></small></td>
+                            <td>&#162;40 <br><small class="text-muted">21/10/21</small></td>
+                            <td>
+                                &#162;80 <br><small class="text-muted">21/10/21</small>
+                            </td>
+                            <td>
+                                &#162;40 <br><small class="text-muted">21/10/21</small>
+                            </td>
+                            <td>
+                                &#162;80 <br><small class="text-muted">21/10/21</small>
+                            </td>
+                            <td>
+                                &#162;40 <br><small class="text-muted">21/10/21</small>
+                            </td>
+                            <td>
+                                &#162;40 <br><small class="text-muted">21/10/21</small>
+                            </td>
+                            <td>
+                                <div class="" style="width: auto">
+                                    <div class="badge-pill custom-danger mx-auto">Irregular</div>
+                                    <small class="text-muted"><strong>Checkup</strong></small>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="d-flex">
+                                    <a href="javascript:void(0);" class="btn btn-outline-warning btn-icon mr-2">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="19.53" height="19" viewBox="0 0 19.53 19">
+                                            <path id="Pencil" class="cls-1" d="M7466.45,1470.62l-5.27-5.13,0.44-.43a3.805,3.805,0,0,1,5.27,0,3.569,3.569,0,0,1,0,5.13Zm-3.46-5.08,3.41,3.32a2.39,2.39,0,0,0-.39-2.95A2.6,2.6,0,0,0,7462.99,1465.54Zm0.74,7.24-3.73-6.04,1.07-.63,3.73,6.04ZM7448.46,1483l1.85-6.76,1.2,0.31-1.3,4.75,4.89-1.26,0.32,1.17Zm7.97-2.67-1.47-3.65-3.75-1.43,7.72-7.58,0.88,0.85-6.39,6.27,2.5,0.96,0.98,2.42,5.18-5.01,0.88,0.85Z" transform="translate(-7448.47 -1464)"/>
+                                        </svg>
+                                    </a>
+                                    <a href="javascript:void(0);" class="btn btn-outline-danger btn-icon">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="19.53" height="19" viewBox="0 0 23.972 32">
+                                            <path id="Flag" class="cls-1" d="M1000.43,1937.48h-1.994v-32h1.994v32Zm7.19-10.08a11.392,11.392,0,0,1-4.59-1l0.8-1.83c3.33,1.45,5.75.72,8.31-.05,2.34-.7,4.96-1.49,8.28-0.47v-13.9c-3.02-1.11-5.3-.43-7.71.29-2.66.8-5.68,1.71-9.68-.04l0.8-1.83c3.33,1.45,5.75.72,8.31-.05,2.66-.8,5.68-1.7,9.68.04l0.6,0.27v18.18l-1.4-.61c-3.33-1.45-5.74-.73-8.31.04A17.311,17.311,0,0,1,1007.62,1927.4Z" transform="translate(-998.438 -1905.47)"/>
+                                          </svg>
+                                    </a>
+                                </div>
+                            </td>
+                        
+                        </tr>
+                        <tr>
+                            <td>P03-09-202166<br><small class="text-muted">GA-201-5642</small></td>
+                            <td>Prepaid(Smart) <br><small class="text-muted">ECG</small></td>
+                            <td>
+                                <div class="" style="width: auto">
+                                    <div class="badge-pill custom-warning">Suspect</div><small class="text-muted text-center mt-1">21/10/21</small>
+                                </div>
+                            </td>
+                            <td>Amoah Kofi <br><small class="text-muted"><strong>0203457891</strong></small></td>
+                            <td>&#162;300 <br><small class="text-muted">21/10/21</small></td>
+                            <td>
+                                &#162;300 <br><small class="text-muted">21/10/21</small>
+                            </td>
+                            <td>
+                                &#162;300 <br><small class="text-muted">21/10/21</small>
+                            </td>
+                            <td>
+                                &#162;200 <br><small class="text-muted">21/10/21</small>
+                            </td>
+                            <td>
+                                &#162;300 <br><small class="text-muted">21/10/21</small>
+                            </td>
+                            <td>
+                                &#162;300 <br><small class="text-muted">21/10/21</small>
+                            </td>
+                            <td>
+                                <div class="" style="width: auto">
+                                    <div class="badge-pill custom-warning mx-auto">Average</div>
+                                    <small class="text-muted"><strong>Investigate</strong></small>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="d-flex">
+                                    <a href="javascript:void(0);" class="btn btn-outline-warning btn-icon mr-2">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="19.53" height="19" viewBox="0 0 19.53 19">
+                                            <path id="Pencil" class="cls-1" d="M7466.45,1470.62l-5.27-5.13,0.44-.43a3.805,3.805,0,0,1,5.27,0,3.569,3.569,0,0,1,0,5.13Zm-3.46-5.08,3.41,3.32a2.39,2.39,0,0,0-.39-2.95A2.6,2.6,0,0,0,7462.99,1465.54Zm0.74,7.24-3.73-6.04,1.07-.63,3.73,6.04ZM7448.46,1483l1.85-6.76,1.2,0.31-1.3,4.75,4.89-1.26,0.32,1.17Zm7.97-2.67-1.47-3.65-3.75-1.43,7.72-7.58,0.88,0.85-6.39,6.27,2.5,0.96,0.98,2.42,5.18-5.01,0.88,0.85Z" transform="translate(-7448.47 -1464)"/>
+                                        </svg>
+                                    </a>
+                                    <a href="javascript:void(0);" class="btn btn-outline-danger btn-icon">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="19.53" height="19" viewBox="0 0 23.972 32">
+                                            <path id="Flag" class="cls-1" d="M1000.43,1937.48h-1.994v-32h1.994v32Zm7.19-10.08a11.392,11.392,0,0,1-4.59-1l0.8-1.83c3.33,1.45,5.75.72,8.31-.05,2.34-.7,4.96-1.49,8.28-0.47v-13.9c-3.02-1.11-5.3-.43-7.71.29-2.66.8-5.68,1.71-9.68-.04l0.8-1.83c3.33,1.45,5.75.72,8.31-.05,2.66-.8,5.68-1.7,9.68.04l0.6,0.27v18.18l-1.4-.61c-3.33-1.45-5.74-.73-8.31.04A17.311,17.311,0,0,1,1007.62,1927.4Z" transform="translate(-998.438 -1905.47)"/>
+                                          </svg>
+                                    </a>
+                                </div>
+                            </td>
+                        
+                        </tr>
+                        <tr>
+                            <td>P03-09-202194<br><small class="text-muted">GA-201-5642</small></td>
+                            <td>Pre-paid <br><small class="text-muted">ECH</small></td>
+                            <td>
+                                <div class="" style="width: auto">
+                                    <div class="badge-pill custom-danger">Illegal</div><small class="text-muted text-center mt-1">21/10/21</small>
+                                </div>
+                            </td>
+                            <td>Koo Nimo <br><small class="text-muted"><strong>0552548190</strong></small></td>
+                            <td>&#162;100 <br><small class="text-muted">21/10/21</small></td>
+                            <td>
+                                &#162;150 <br><small class="text-muted">21/10/21</small>
+                            </td>
+                            <td>
+                                &#162;100 <br><small class="text-muted">21/10/21</small>
+                            </td>
+                            <td>
+                                &#162;150 <br><small class="text-muted">21/10/21</small>
+                            </td>
+                            <td>
+                                &#162;100 <br><small class="text-muted">21/10/21</small>
+                            </td>
+                            <td>
+                                &#162;100 <br><small class="text-muted">21/10/21</small>
+                            </td>
+                            <td>
+                                <div class="" style="width: auto">
+                                    <div class="badge-pill custom-danger mx-auto">Illegal</div>
+                                    <small class="text-muted"><strong>Checkup</strong></small>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="d-flex">
+                                    <a href="javascript:void(0);" class="btn btn-outline-warning btn-icon mr-2">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="19.53" height="19" viewBox="0 0 19.53 19">
+                                            <path id="Pencil" class="cls-1" d="M7466.45,1470.62l-5.27-5.13,0.44-.43a3.805,3.805,0,0,1,5.27,0,3.569,3.569,0,0,1,0,5.13Zm-3.46-5.08,3.41,3.32a2.39,2.39,0,0,0-.39-2.95A2.6,2.6,0,0,0,7462.99,1465.54Zm0.74,7.24-3.73-6.04,1.07-.63,3.73,6.04ZM7448.46,1483l1.85-6.76,1.2,0.31-1.3,4.75,4.89-1.26,0.32,1.17Zm7.97-2.67-1.47-3.65-3.75-1.43,7.72-7.58,0.88,0.85-6.39,6.27,2.5,0.96,0.98,2.42,5.18-5.01,0.88,0.85Z" transform="translate(-7448.47 -1464)"/>
+                                        </svg>
+                                    </a>
+                                    <a href="javascript:void(0);" class="btn btn-outline-danger btn-icon">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="19.53" height="19" viewBox="0 0 23.972 32">
+                                            <path id="Flag" class="cls-1" d="M1000.43,1937.48h-1.994v-32h1.994v32Zm7.19-10.08a11.392,11.392,0,0,1-4.59-1l0.8-1.83c3.33,1.45,5.75.72,8.31-.05,2.34-.7,4.96-1.49,8.28-0.47v-13.9c-3.02-1.11-5.3-.43-7.71.29-2.66.8-5.68,1.71-9.68-.04l0.8-1.83c3.33,1.45,5.75.72,8.31-.05,2.66-.8,5.68-1.7,9.68.04l0.6,0.27v18.18l-1.4-.61c-3.33-1.45-5.74-.73-8.31.04A17.311,17.311,0,0,1,1007.62,1927.4Z" transform="translate(-998.438 -1905.47)"/>
+                                          </svg>
+                                    </a>
+                                </div>
+                            </td>
+                        
+                        </tr>
+                        <tr>
+                            <td>P03-09-202107<br><small class="text-muted">GA-201-5642</small></td>
+                            <td>Pre-paid <br><small class="text-muted">ECG</small></td>
+                            <td>
+                                <div class="" style="width: auto">
+                                    <div class="badge-pill custom-success">Genuine</div><small class="text-muted text-center mt-1">21/10/21</small>
+                                </div>
+                            </td>
+                            <td>Ataa Nii <br><small class="text-muted"><strong>0302222179</strong></small></td>
+                            <td>&#162;50 <br><small class="text-muted">21/10/21</small></td>
+                            <td>
+                                &#162;40 <br><small class="text-muted">21/10/21</small>
+                            </td>
+                            <td>
+                                &#162;50 <br><small class="text-muted">21/10/21</small>
+                            </td>
+                            <td>
+                                &#162;40 <br><small class="text-muted">21/10/21</small>
+                            </td>
+                            <td>
+                                &#162;50 <br><small class="text-muted">21/10/21</small>
+                            </td>
+                            <td>
+                                &#162;50 <br><small class="text-muted">21/10/21</small>
+                            </td>
+                            <td>
+                                <div class="" style="width: auto">
+                                    <div class="badge-pill custom-success mx-auto">Good</div>
+                                   
+                                </div>
+                            </td>
+                            <td>
+                                <div class="d-flex">
+                                    <a href="javascript:void(0);" class="btn btn-outline-warning btn-icon mr-2">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="19.53" height="19" viewBox="0 0 19.53 19">
+                                            <path id="Pencil" class="cls-1" d="M7466.45,1470.62l-5.27-5.13,0.44-.43a3.805,3.805,0,0,1,5.27,0,3.569,3.569,0,0,1,0,5.13Zm-3.46-5.08,3.41,3.32a2.39,2.39,0,0,0-.39-2.95A2.6,2.6,0,0,0,7462.99,1465.54Zm0.74,7.24-3.73-6.04,1.07-.63,3.73,6.04ZM7448.46,1483l1.85-6.76,1.2,0.31-1.3,4.75,4.89-1.26,0.32,1.17Zm7.97-2.67-1.47-3.65-3.75-1.43,7.72-7.58,0.88,0.85-6.39,6.27,2.5,0.96,0.98,2.42,5.18-5.01,0.88,0.85Z" transform="translate(-7448.47 -1464)"/>
+                                        </svg>
+                                    </a>
+                                    <a href="javascript:void(0);" class="btn btn-outline-danger btn-icon">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="19.53" height="19" viewBox="0 0 23.972 32">
+                                            <path id="Flag" class="cls-1" d="M1000.43,1937.48h-1.994v-32h1.994v32Zm7.19-10.08a11.392,11.392,0,0,1-4.59-1l0.8-1.83c3.33,1.45,5.75.72,8.31-.05,2.34-.7,4.96-1.49,8.28-0.47v-13.9c-3.02-1.11-5.3-.43-7.71.29-2.66.8-5.68,1.71-9.68-.04l0.8-1.83c3.33,1.45,5.75.72,8.31-.05,2.66-.8,5.68-1.7,9.68.04l0.6,0.27v18.18l-1.4-.61c-3.33-1.45-5.74-.73-8.31.04A17.311,17.311,0,0,1,1007.62,1927.4Z" transform="translate(-998.438 -1905.47)"/>
+                                          </svg>
+                                    </a>
+                                </div>
+                            </td>
+                        
+                        </tr>
+                        
+                        
+                    </tbody>
+                    
+                
+                </table>
+            </div>
+        </div>
+
+        <div class="modal fade" id="add-meter-modal" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">
+                           Add Meter
+        
+                        </h4>
+                       
+                        <div class="panel-toolbar">
+                            <button class="btn btn-panel" data-dismiss="modal"  aria-label="Close"></button>
+                        </div>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+
+                            <div class="form-group col-lg-12">
+                                <label class="form-label" for="simpleinput1">Meter No.</label>
+                                <input type="text" id="simpleinput1" class="form-control" placeholder="...">
+                                
+                            </div>
+
+                            <div class="form-group col-lg-12">
+                                <label for="" class="form-label">Meter type</label>
+                                <div>
+        
+                                
+                                    <div class="custom-control custom-radio custom-control-inline">
+                                        <input type="radio" class="custom-control-input" id="smart-prepaid" name="meter-type" checked="">
+                                        <label class="custom-control-label" for="smart-prepaid">Smart Prepaid</label>
+                                    </div>
+                                    <div class="custom-control custom-radio custom-control-inline">
+                                        <input type="radio" class="custom-control-input" id="analog-pospaid" name="meter-type">
+                                        <label class="custom-control-label" for="analog-pospaid">Analog pospaid</label>
+                                    </div>
+                                    
+                                </div>
+                            </div>
+
+                            <div class="form-group col-lg-12">
+                                <label for="" class="form-label">Provider</label>
+                                <div>
+        
+                                
+                                    <div class="custom-control custom-radio custom-control-inline" style="margin-right: 4.725rem;">
+                                        <input type="radio" class="custom-control-input" id="ecg" name="provider" checked="">
+                                        <label class="custom-control-label" for="ecg">ECG</label>
+                                    </div>
+                                    <div class="custom-control custom-radio custom-control-inline" style="margin-right: 4rem;">
+                                        <input type="radio" class="custom-control-input" id="shep" name="provider">
+                                        <label class="custom-control-label" for="shep">SHEP</label>
+                                    </div>
+                                    <div class="custom-control custom-radio custom-control-inline">
+                                        <input type="radio" class="custom-control-input" id="other" name="provider">
+                                        <label class="custom-control-label" for="other">Other</label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group col-lg-12">
+                                <label for="" class="form-label">Usage</label>
+                                <div>
+        
+                                
+                                    <div class="custom-control custom-radio custom-control-inline" style="margin-right: 2.125rem;">
+                                        <input type="radio" class="custom-control-input" id="residential" name="residential" checked="">
+                                        <label class="custom-control-label" for="residential">Residential</label>
+                                    </div>
+                                    <div class="custom-control custom-radio custom-control-inline" style="margin-right: 4rem;">
+                                        <input type="radio" class="custom-control-input" id="shep" name="residential">
+                                        <label class="custom-control-label" for="shep">Commercial</label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group col-lg-12">
+                                <label class="form-label" for="addon-wrapping-right">Ghana Post Address of Meter location</label>
+                                <div class="input-group flex-nowrap">
+                                    <input id="addon-wrapping-right" type="text" class="form-control" placeholder="type here..." aria-label="Username" aria-describedby="addon-wrapping-right">
+                                    <div class="input-group-append">
+                                        <span class="input-group-text"><i class="fal fa-globe fs-xl"></i></span>
+                                    </div>
+                                </div>
+                            </div>
+        
+                            <div class="form-group col-lg-12">
+                                <label class="form-label" for="simpleinput1">Meter Serial No. (Optional)</label>
+                                <input type="text" id="simpleinput1" class="form-control" placeholder="type here...">
+                                
+                            </div>
+
+                            <div class="form-group col-lg-12">
+                                <label class="form-label" for="addon-wrapping-right">Power station ID</label>
+                                <div class="input-group flex-nowrap">
+                                    <input id="addon-wrapping-right" type="text" class="form-control" placeholder="type here..." aria-label="Username" aria-describedby="addon-wrapping-right">
+                                    <div class="input-group-append">
+                                        <span class="input-group-text"><i class="fal fa-globe fs-xl"></i></span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group col-lg-12">
+                                <div class="custom-control custom-checkbox">
+                                    <input type="checkbox" class="custom-control-input" id="owner-is-the-current-user" checked="">
+                                    <label class="custom-control-label" for="owner-is-the-current-user">Owner is the current User</label>
+                                </div>
+                            </div>
+
+                            <div class="form-group col-lg-12">
+                                <label class="form-label" for="simpleinput1">Current User's First name</label>
+                                <input type="text" id="simpleinput1" class="form-control" placeholder="" disabled>
+                                
+                            </div>
+
+                            <div class="form-group col-lg-12">
+                                <label class="form-label" for="simpleinput1">Current User's Last & Other names</label>
+                                <input type="text" id="simpleinput1" class="form-control" placeholder="" disabled>
+                                
+                            </div>
+
+        
+                            <div class="form-group col-lg-12">
+                                <label class="form-label" for="addon-wrapping-right">Current User's Mobile No.</label>
+                                <div class="input-group flex-nowrap">
+                                    <input id="addon-wrapping-right" type="text" class="form-control" placeholder="" aria-label="Username" aria-describedby="addon-wrapping-right">
+                                    <div class="input-group-append">
+                                        <span class="input-group-text"><i class="fal fa-phone fs-xl"></i></span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            
+                        </div>
+                    </div>
+                    <div class="modal-footer" style="margin-bottom: 0.75rem;">
+                        <button class="btn btn-custom-success m-auto" style="width: 200px;">Submit</button>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+
+        
+        <!-- datatable start -->
+        
+        <!-- datatable end -->
+        <!-- END Page Wrapper -->
+        <!-- BEGIN Quick Menu -->
+        <!-- to add more items, please make sure to change the variable '$menu-items: number;' in your _page-components-shortcut.scss -->
+      
+        <!-- END Quick Menu -->
+        <!-- BEGIN Messenger -->
+        
+        <!-- END Messenger -->
+        <!-- BEGIN Page Settings -->
+        <div class="modal fade js-modal-settings modal-backdrop-transparent" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-right modal-md">
+                <div class="modal-content">
+                    <div class="dropdown-header bg-trans-gradient d-flex justify-content-center align-items-center w-100">
+                        <h4 class="m-0 text-center color-white">
+                            Layout Settings
+                            <small class="mb-0 opacity-80">User Interface Settings</small>
+                        </h4>
+                        <button type="button" class="close text-white position-absolute pos-top pos-right p-2 m-1 mr-2" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true"><i class="fal fa-times"></i></span>
+                        </button>
+                    </div>
+                    <div class="modal-body p-0">
+                        <div class="settings-panel">
+                            <div class="mt-4 d-table w-100 px-5">
+                                <div class="d-table-cell align-middle">
+                                    <h5 class="p-0">
+                                        App Layout
+                                    </h5>
+                                </div>
+                            </div>
+                            <div class="list" id="fh">
+                                <a href="#" onclick="return false;" class="btn btn-switch" data-action="toggle" data-class="header-function-fixed"></a>
+                                <span class="onoffswitch-title">Fixed Header</span>
+                                <span class="onoffswitch-title-desc">header is in a fixed at all times</span>
+                            </div>
+                            <div class="list" id="nff">
+                                <a href="#" onclick="return false;" class="btn btn-switch" data-action="toggle" data-class="nav-function-fixed"></a>
+                                <span class="onoffswitch-title">Fixed Navigation</span>
+                                <span class="onoffswitch-title-desc">left panel is fixed</span>
+                            </div>
+                            <div class="list" id="nfm">
+                                <a href="#" onclick="return false;" class="btn btn-switch" data-action="toggle" data-class="nav-function-minify"></a>
+                                <span class="onoffswitch-title">Minify Navigation</span>
+                                <span class="onoffswitch-title-desc">Skew nav to maximize space</span>
+                            </div>
+                            <div class="list" id="nfh">
+                                <a href="#" onclick="return false;" class="btn btn-switch" data-action="toggle" data-class="nav-function-hidden"></a>
+                                <span class="onoffswitch-title">Hide Navigation</span>
+                                <span class="onoffswitch-title-desc">roll mouse on edge to reveal</span>
+                            </div>
+                            <div class="list" id="nft">
+                                <a href="#" onclick="return false;" class="btn btn-switch" data-action="toggle" data-class="nav-function-top"></a>
+                                <span class="onoffswitch-title">Top Navigation</span>
+                                <span class="onoffswitch-title-desc">Relocate left pane to top</span>
+                            </div>
+                            <div class="list" id="fff">
+                                <a href="#" onclick="return false;" class="btn btn-switch" data-action="toggle" data-class="footer-function-fixed"></a>
+                                <span class="onoffswitch-title">Fixed Footer</span>
+                                <span class="onoffswitch-title-desc">page footer is fixed</span>
+                            </div>
+                            <div class="list" id="mmb">
+                                <a href="#" onclick="return false;" class="btn btn-switch" data-action="toggle" data-class="mod-main-boxed"></a>
+                                <span class="onoffswitch-title">Boxed Layout</span>
+                                <span class="onoffswitch-title-desc">Encapsulates to a container</span>
+                            </div>
+                            <div class="expanded">
+                                <ul class="mb-3 mt-1">
+                                    <li>
+                                        <div class="bg-fusion-50" data-action="toggle" data-class="mod-bg-1"></div>
+                                    </li>
+                                    <li>
+                                        <div class="bg-warning-200" data-action="toggle" data-class="mod-bg-2"></div>
+                                    </li>
+                                    <li>
+                                        <div class="bg-primary-200" data-action="toggle" data-class="mod-bg-3"></div>
+                                    </li>
+                                    <li>
+                                        <div class="bg-success-300" data-action="toggle" data-class="mod-bg-4"></div>
+                                    </li>
+                                    <li>
+                                        <div class="bg-white border" data-action="toggle" data-class="mod-bg-none"></div>
+                                    </li>
+                                </ul>
+                                <div class="list" id="mbgf">
+                                    <a href="#" onclick="return false;" class="btn btn-switch" data-action="toggle" data-class="mod-fixed-bg"></a>
+                                    <span class="onoffswitch-title">Fixed Background</span>
+                                </div>
+                            </div>
+                            <div class="mt-4 d-table w-100 px-5">
+                                <div class="d-table-cell align-middle">
+                                    <h5 class="p-0">
+                                        Mobile Menu
+                                    </h5>
+                                </div>
+                            </div>
+                            <div class="list" id="nmp">
+                                <a href="#" onclick="return false;" class="btn btn-switch" data-action="toggle" data-class="nav-mobile-push"></a>
+                                <span class="onoffswitch-title">Push Content</span>
+                                <span class="onoffswitch-title-desc">Content pushed on menu reveal</span>
+                            </div>
+                            <div class="list" id="nmno">
+                                <a href="#" onclick="return false;" class="btn btn-switch" data-action="toggle" data-class="nav-mobile-no-overlay"></a>
+                                <span class="onoffswitch-title">No Overlay</span>
+                                <span class="onoffswitch-title-desc">Removes mesh on menu reveal</span>
+                            </div>
+                            <div class="list" id="sldo">
+                                <a href="#" onclick="return false;" class="btn btn-switch" data-action="toggle" data-class="nav-mobile-slide-out"></a>
+                                <span class="onoffswitch-title">Off-Canvas <sup>(beta)</sup></span>
+                                <span class="onoffswitch-title-desc">Content overlaps menu</span>
+                            </div>
+                            <div class="mt-4 d-table w-100 px-5">
+                                <div class="d-table-cell align-middle">
+                                    <h5 class="p-0">
+                                        Accessibility
+                                    </h5>
+                                </div>
+                            </div>
+                            <div class="list" id="mbf">
+                                <a href="#" onclick="return false;" class="btn btn-switch" data-action="toggle" data-class="mod-bigger-font"></a>
+                                <span class="onoffswitch-title">Bigger Content Font</span>
+                                <span class="onoffswitch-title-desc">content fonts are bigger for readability</span>
+                            </div>
+                            <div class="list" id="mhc">
+                                <a href="#" onclick="return false;" class="btn btn-switch" data-action="toggle" data-class="mod-high-contrast"></a>
+                                <span class="onoffswitch-title">High Contrast Text (WCAG 2 AA)</span>
+                                <span class="onoffswitch-title-desc">4.5:1 text contrast ratio</span>
+                            </div>
+                            <div class="list" id="mcb">
+                                <a href="#" onclick="return false;" class="btn btn-switch" data-action="toggle" data-class="mod-color-blind"></a>
+                                <span class="onoffswitch-title">Daltonism <sup>(beta)</sup> </span>
+                                <span class="onoffswitch-title-desc">color vision deficiency</span>
+                            </div>
+                            <div class="list" id="mpc">
+                                <a href="#" onclick="return false;" class="btn btn-switch" data-action="toggle" data-class="mod-pace-custom"></a>
+                                <span class="onoffswitch-title">Preloader Inside</span>
+                                <span class="onoffswitch-title-desc">preloader will be inside content</span>
+                            </div>
+                            <div class="list" id="mpi">
+                                <a href="#" onclick="return false;" class="btn btn-switch" data-action="toggle" data-class="mod-panel-icon"></a>
+                                <span class="onoffswitch-title">SmartPanel Icons (not Panels)</span>
+                                <span class="onoffswitch-title-desc">smartpanel buttons will appear as icons</span>
+                            </div>
+                            <div class="mt-4 d-table w-100 px-5">
+                                <div class="d-table-cell align-middle">
+                                    <h5 class="p-0">
+                                        Global Modifications
+                                    </h5>
+                                </div>
+                            </div>
+                            <div class="list" id="mcbg">
+                                <a href="#" onclick="return false;" class="btn btn-switch" data-action="toggle" data-class="mod-clean-page-bg"></a>
+                                <span class="onoffswitch-title">Clean Page Background</span>
+                                <span class="onoffswitch-title-desc">adds more whitespace</span>
+                            </div>
+                            <div class="list" id="mhni">
+                                <a href="#" onclick="return false;" class="btn btn-switch" data-action="toggle" data-class="mod-hide-nav-icons"></a>
+                                <span class="onoffswitch-title">Hide Navigation Icons</span>
+                                <span class="onoffswitch-title-desc">invisible navigation icons</span>
+                            </div>
+                            <div class="list" id="dan">
+                                <a href="#" onclick="return false;" class="btn btn-switch" data-action="toggle" data-class="mod-disable-animation"></a>
+                                <span class="onoffswitch-title">Disable CSS Animation</span>
+                                <span class="onoffswitch-title-desc">Disables CSS based animations</span>
+                            </div>
+                            <div class="list" id="mhic">
+                                <a href="#" onclick="return false;" class="btn btn-switch" data-action="toggle" data-class="mod-hide-info-card"></a>
+                                <span class="onoffswitch-title">Hide Info Card</span>
+                                <span class="onoffswitch-title-desc">Hides info card from left panel</span>
+                            </div>
+                            <div class="list" id="mlph">
+                                <a href="#" onclick="return false;" class="btn btn-switch" data-action="toggle" data-class="mod-lean-subheader"></a>
+                                <span class="onoffswitch-title">Lean Subheader</span>
+                                <span class="onoffswitch-title-desc">distinguished page header</span>
+                            </div>
+                            <div class="list" id="mnl">
+                                <a href="#" onclick="return false;" class="btn btn-switch" data-action="toggle" data-class="mod-nav-link"></a>
+                                <span class="onoffswitch-title">Hierarchical Navigation</span>
+                                <span class="onoffswitch-title-desc">Clear breakdown of nav links</span>
+                            </div>
+                            <div class="list" id="mdn">
+                                <a href="#" onclick="return false;" class="btn btn-switch" data-action="toggle" data-class="mod-nav-dark"></a>
+                                <span class="onoffswitch-title">Dark Navigation</span>
+                                <span class="onoffswitch-title-desc">Navigation background is darkend</span>
+                            </div>
+                            <hr class="mb-0 mt-4">
+                            <div class="mt-4 d-table w-100 pl-5 pr-3">
+                                <div class="d-table-cell align-middle">
+                                    <h5 class="p-0">
+                                        Global Font Size
+                                    </h5>
+                                </div>
+                            </div>
+                            <div class="list mt-1">
+                                <div class="btn-group btn-group-sm btn-group-toggle my-2" data-toggle="buttons">
+                                    <label class="btn btn-default btn-sm" data-action="toggle-swap" data-class="root-text-sm" data-target="html">
+                                        <input type="radio" name="changeFrontSize"> SM
+                                    </label>
+                                    <label class="btn btn-default btn-sm" data-action="toggle-swap" data-class="root-text" data-target="html">
+                                        <input type="radio" name="changeFrontSize" checked=""> MD
+                                    </label>
+                                    <label class="btn btn-default btn-sm" data-action="toggle-swap" data-class="root-text-lg" data-target="html">
+                                        <input type="radio" name="changeFrontSize"> LG
+                                    </label>
+                                    <label class="btn btn-default btn-sm" data-action="toggle-swap" data-class="root-text-xl" data-target="html">
+                                        <input type="radio" name="changeFrontSize"> XL
+                                    </label>
+                                </div>
+                                <span class="onoffswitch-title-desc d-block mb-0">Change <strong>root</strong> font size to effect rem
+                                    values (resets on page refresh)</span>
+                            </div>
+                            <hr class="mb-0 mt-4">
+                            <div class="mt-4 d-table w-100 pl-5 pr-3">
+                                <div class="d-table-cell align-middle">
+                                    <h5 class="p-0 pr-2 d-flex">
+                                        Theme colors
+                                        <a href="#" class="ml-auto fw-400 fs-xs" data-toggle="popover" data-trigger="focus" data-placement="top" title="" data-html="true" data-content="The settings below uses <code>localStorage</code> to load the external <strong>CSS</strong> file as an overlap to the base css. Due to network latency and <strong>CPU utilization</strong>, you may experience a brief flickering effect on page load which may show the intial applied theme for a split second. Setting the prefered style/theme in the header will prevent this from happening." data-original-title="<span class='text-primary'><i class='fal fa-exclamation-triangle mr-1'></i> Heads up!</span>" data-template="<div class=&quot;popover bg-white border-white&quot; role=&quot;tooltip&quot;><div class=&quot;arrow&quot;></div><h3 class=&quot;popover-header bg-transparent&quot;></h3><div class=&quot;popover-body fs-xs&quot;></div></div>"><i class="fal fa-info-circle mr-1"></i> more info</a>
+                                    </h5>
+                                </div>
+                            </div>
+                            <div class="expanded theme-colors pl-5 pr-3">
+                                <ul class="m-0">
+                                    <li>
+                                        <a href="#" id="myapp-0" data-action="theme-update" data-themesave data-theme="" data-toggle="tooltip" data-placement="top" title="Wisteria (base css)" data-original-title="Wisteria (base css)"></a>
+                                    </li>
+                                    <li>
+                                        <a href="#" id="myapp-1" data-action="theme-update" data-themesave data-theme="css/themes/cust-theme-1.css" data-toggle="tooltip" data-placement="top" title="Tapestry" data-original-title="Tapestry"></a>
+                                    </li>
+                                    <li>
+                                        <a href="#" id="myapp-2" data-action="theme-update" data-themesave data-theme="css/themes/cust-theme-2.css" data-toggle="tooltip" data-placement="top" title="Atlantis" data-original-title="Atlantis"></a>
+                                    </li>
+                                    <li>
+                                        <a href="#" id="myapp-3" data-action="theme-update" data-themesave data-theme="css/themes/cust-theme-3.css" data-toggle="tooltip" data-placement="top" title="Indigo" data-original-title="Indigo"></a>
+                                    </li>
+                                    <li>
+                                        <a href="#" id="myapp-4" data-action="theme-update" data-themesave data-theme="css/themes/cust-theme-4.css" data-toggle="tooltip" data-placement="top" title="Dodger Blue" data-original-title="Dodger Blue"></a>
+                                    </li>
+                                    <li>
+                                        <a href="#" id="myapp-5" data-action="theme-update" data-themesave data-theme="css/themes/cust-theme-5.css" data-toggle="tooltip" data-placement="top" title="Tradewind" data-original-title="Tradewind"></a>
+                                    </li>
+                                    <li>
+                                        <a href="#" id="myapp-6" data-action="theme-update" data-themesave data-theme="css/themes/cust-theme-6.css" data-toggle="tooltip" data-placement="top" title="Cranberry" data-original-title="Cranberry"></a>
+                                    </li>
+                                    <li>
+                                        <a href="#" id="myapp-7" data-action="theme-update" data-themesave data-theme="css/themes/cust-theme-7.css" data-toggle="tooltip" data-placement="top" title="Oslo Gray" data-original-title="Oslo Gray"></a>
+                                    </li>
+                                    <li>
+                                        <a href="#" id="myapp-8" data-action="theme-update" data-themesave data-theme="css/themes/cust-theme-8.css" data-toggle="tooltip" data-placement="top" title="Chetwode Blue" data-original-title="Chetwode Blue"></a>
+                                    </li>
+                                    <li>
+                                        <a href="#" id="myapp-9" data-action="theme-update" data-themesave data-theme="css/themes/cust-theme-9.css" data-toggle="tooltip" data-placement="top" title="Apricot" data-original-title="Apricot"></a>
+                                    </li>
+                                    <li>
+                                        <a href="#" id="myapp-10" data-action="theme-update" data-themesave data-theme="css/themes/cust-theme-10.css" data-toggle="tooltip" data-placement="top" title="Blue Smoke" data-original-title="Blue Smoke"></a>
+                                    </li>
+                                    <li>
+                                        <a href="#" id="myapp-11" data-action="theme-update" data-themesave data-theme="css/themes/cust-theme-11.css" data-toggle="tooltip" data-placement="top" title="Green Smoke" data-original-title="Green Smoke"></a>
+                                    </li>
+                                    <li>
+                                        <a href="#" id="myapp-12" data-action="theme-update" data-themesave data-theme="css/themes/cust-theme-12.css" data-toggle="tooltip" data-placement="top" title="Wild Blue Yonder" data-original-title="Wild Blue Yonder"></a>
+                                    </li>
+                                    <li>
+                                        <a href="#" id="myapp-13" data-action="theme-update" data-themesave data-theme="css/themes/cust-theme-13.css" data-toggle="tooltip" data-placement="top" title="Emerald" data-original-title="Emerald"></a>
+                                    </li>
+                                    <li>
+                                        <a href="#" id="myapp-14" data-action="theme-update" data-themesave data-theme="css/themes/cust-theme-14.css" data-toggle="tooltip" data-placement="top" title="Supernova" data-original-title="Supernova"></a>
+                                    </li>
+                                    <li>
+                                        <a href="#" id="myapp-15" data-action="theme-update" data-themesave data-theme="css/themes/cust-theme-15.css" data-toggle="tooltip" data-placement="top" title="Hoki" data-original-title="Hoki"></a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <hr class="mb-0 mt-4">
+                            <div class="mt-4 d-table w-100 pl-5 pr-3">
+                                <div class="d-table-cell align-middle">
+                                    <h5 class="p-0 pr-2 d-flex">
+                                        Theme Modes (beta)
+                                        <a href="#" class="ml-auto fw-400 fs-xs" data-toggle="popover" data-trigger="focus" data-placement="top" title="" data-html="true" data-content="This is a brand new technique we are introducing which uses CSS variables to infiltrate color options. While this has been working nicely on modern browsers without much issues, some users <strong>may still face issues on Internet Explorer </strong>. Until these issues are resolved or Internet Explorer improves, this feature will remain in Beta" data-original-title="<span class='text-primary'><i class='fal fa-question-circle mr-1'></i> Why beta?</span>" data-template="<div class=&quot;popover bg-white border-white&quot; role=&quot;tooltip&quot;><div class=&quot;arrow&quot;></div><h3 class=&quot;popover-header bg-transparent&quot;></h3><div class=&quot;popover-body fs-xs&quot;></div></div>"><i class="fal fa-question-circle mr-1"></i> why beta?</a>
+                                    </h5>
+                                </div>
+                            </div>
+                            <div class="pl-5 pr-3 py-3">
+                                <div class="ie-only alert alert-warning d-none">
+                                    <h6>Internet Explorer Issue</h6>
+                                    This particular component may not work as expected in Internet Explorer. Please use with caution.
+                                </div>
+                                <div class="row no-gutters">
+                                    <div class="col-4 pr-2 text-center">
+                                        <div id="skin-default" data-action="toggle-replace" data-replaceclass="mod-skin-light mod-skin-dark" data-class="" data-toggle="tooltip" data-placement="top" title="" class="d-flex bg-white border border-primary rounded overflow-hidden text-success js-waves-on" data-original-title="Default Mode" style="height: 80px">
+                                            <div class="bg-primary-600 bg-primary-gradient px-2 pt-0 border-right border-primary"></div>
+                                            <div class="d-flex flex-column flex-1">
+                                                <div class="bg-white border-bottom border-primary py-1"></div>
+                                                <div class="bg-faded flex-1 pt-3 pb-3 px-2">
+                                                    <div class="py-3" style="background:url('img/demo/s-1.png') top left no-repeat;background-size: 100%;"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        Default
+                                    </div>
+                                    <div class="col-4 px-1 text-center">
+                                        <div id="skin-light" data-action="toggle-replace" data-replaceclass="mod-skin-dark" data-class="mod-skin-light" data-toggle="tooltip" data-placement="top" title="" class="d-flex bg-white border border-secondary rounded overflow-hidden text-success js-waves-on" data-original-title="Light Mode" style="height: 80px">
+                                            <div class="bg-white px-2 pt-0 border-right border-"></div>
+                                            <div class="d-flex flex-column flex-1">
+                                                <div class="bg-white border-bottom border- py-1"></div>
+                                                <div class="bg-white flex-1 pt-3 pb-3 px-2">
+                                                    <div class="py-3" style="background:url('img/demo/s-1.png') top left no-repeat;background-size: 100%;"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        Light
+                                    </div>
+                                    <div class="col-4 pl-2 text-center">
+                                        <div id="skin-dark" data-action="toggle-replace" data-replaceclass="mod-skin-light" data-class="mod-skin-dark" data-toggle="tooltip" data-placement="top" title="" class="d-flex bg-white border border-dark rounded overflow-hidden text-success js-waves-on" data-original-title="Dark Mode" style="height: 80px">
+                                            <div class="bg-fusion-500 px-2 pt-0 border-right"></div>
+                                            <div class="d-flex flex-column flex-1">
+                                                <div class="bg-fusion-600 border-bottom py-1"></div>
+                                                <div class="bg-fusion-300 flex-1 pt-3 pb-3 px-2">
+                                                    <div class="py-3 opacity-30" style="background:url('img/demo/s-1.png') top left no-repeat;background-size: 100%;"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        Dark
+                                    </div>
+                                </div>
+                            </div>
+                            <hr class="mb-0 mt-4">
+                            <div class="pl-5 pr-3 py-3 bg-faded">
+                                <div class="row no-gutters">
+                                    <div class="col-6 pr-1">
+                                        <a href="#" class="btn btn-outline-danger fw-500 btn-block" data-action="app-reset">Reset Settings</a>
+                                    </div>
+                                    <div class="col-6 pl-1">
+                                        <a href="#" class="btn btn-danger fw-500 btn-block" data-action="factory-reset">Factory Reset</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div> <span id="saving"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- END Page Settings -->
+        <script src="/js/vendors.bundle.js"></script>
+        <script src="/js/app.bundle.js"></script>
+        <script src="/js/datagrid/datatables/datatables.bundle.js"></script>
+        <script src="/js/statistics/easypiechart/easypiechart.bundle.js"></script>
+        <script src="/js/statistics/d3/d3.js"></script>
+        <script src="/js/statistics/c3/c3.js"></script>
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBLxvQxzcnFc8CH2rFmQWthopHhF1xHsYc&map_id=814f74c1c6059940&amp;callback=&amp;libraries=places,drawing&amp;v=weekly&amp;region=GH" async=""></script>
+        <script src="/js/dependency/moment/moment.js"></script>
+        <script src="/js/formplugins/bootstrap-daterangepicker/bootstrap-daterangepicker.js"></script>
+        <!--dygraph demo data -->
+        <script src="js/statistics/demo-data/demo-data-dygraph.js"></script>
+        <!-- plugin dygraph.js : MIT license -->
+        <script src="js/statistics/dygraph/dygraph.js"></script>
+        <script src="/js/formplugins/ion-rangeslider/ion-rangeslider.js"></script>
+        <script src="assets/vendor/libs/bootstrap-select/bootstrap-select.js"></script>
+        <script src="/js/formplugins/summernote/summernote.js" defer></script>
+        <script src="/js/formplugins/select2/select2.bundle.js" defer></script>
+
+        <script>
+            $(function () {
+              $('.selectpicker').selectpicker();
+            });
+        </script>
+    <script type="text/javascript" src="/js/chunk-vendors.js"></script><script type="text/javascript" src="/js/app.js"></script></body>
+    <!-- END Body -->
+</html>

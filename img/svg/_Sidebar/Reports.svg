@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="19.188" height="17.594" viewBox="0 0 19.188 17.594">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #c0d2f9;
+        fill-rule: evenodd;
+      }
+    </style>
+  </defs>
+  <path id="Reports" class="cls-1" d="M42.541,217.84v0.006H32.967l-4.849,8.781,4.849,8.813h9.57l4.783-8.813Zm-0.958,16h-7.67l-3.969-7.213,3.966-7.182h7.727l3.886,7.184Zm-4.639-5.6h1.6v-6.4h-1.6v6.4Zm-0.03,3.2h1.6v-1.6h-1.6v1.6Z" transform="translate(-28.125 -217.844)"/>
+</svg>
